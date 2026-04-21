@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+
+# TODO: When you switch to https://www.cura-concept.com/, update this sitemap URL too.
+Sitemap: https://curaconcept.github.io/cura-concept/sitemap.xml

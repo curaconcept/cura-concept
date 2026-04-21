@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <!-- SPA note: your router does not change URLs today, so we list only the canonical entrypoint. -->
+  <url>
+    <loc>https://curaconcept.github.io/cura-concept/</loc>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+</urlset>

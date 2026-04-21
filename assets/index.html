@@ -1323,6 +1323,10 @@
                     
                     currentPage = targetId;
 
+                    // Let other scripts (e.g. contact form) react to SPA navigation.
+                    // Keep the event name stable; other modules may rely on it.
+                    window.dispatchEvent(new CustomEvent('cura:page', { detail: { page: targetId } }));
+
                     if (sceneConfigs[targetId]) {
                         targetCamPos = sceneConfigs[targetId].cam;
                         targetLookAt = sceneConfigs[targetId].lookAt;
@@ -1375,6 +1379,18 @@
         const submitBtn = document.getElementById("contact-submit");
         const statusEl = document.getElementById("contact-status");
         const pageLoadTs = Date.now();
+        let contactEnteredAt = window.__contactEnteredAt || pageLoadTs;
+
+        // If the user navigates to Contact via the SPA router, start the anti-bot timer then.
+        window.addEventListener("cura:page", (e) => {
+            const page = e?.detail?.page;
+            if (page === "contact") {
+                contactEnteredAt = Date.now();
+                window.__contactEnteredAt = contactEnteredAt;
+                // Clear any previous error state when arriving.
+                if (statusEl) statusEl.textContent = "";
+            }
+        });
 
         const setStatus = (message, kind = "info") => {
             statusEl.textContent = message;
@@ -1382,12 +1398,17 @@
         };
 
         const isValidEmail = (email) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(String(email || "").trim());
+        const safeOneLine = (value) =>
+            String(value ?? "")
+                .replace(/\s+/g, " ")
+                .trim()
+                .slice(0, 280);
 
         form?.addEventListener("submit", async (e) => {
             e.preventDefault();
             setStatus("");
 
-            const elapsedMs = Date.now() - pageLoadTs;
+            const elapsedMs = Date.now() - (contactEnteredAt || pageLoadTs);
             const companyWebsite = (document.getElementById("companyWebsite")?.value || "").trim();
             if (companyWebsite) {
                 setStatus("Thanks — we’ll be in touch shortly.", "success");
@@ -1408,8 +1429,16 @@
                 setStatus("Please fill out all fields.", "error");
                 return;
             }
+            if (fullName.length < 2) {
+                setStatus("Please enter your name.", "error");
+                return;
+            }
             if (!isValidEmail(email)) {
                 setStatus("Please enter a valid email address.", "error");
+                return;
+            }
+            if (message.length < 10) {
+                setStatus("Please add a bit more detail (at least 10 characters).", "error");
                 return;
             }
 
@@ -1432,7 +1461,10 @@
                 form.reset();
             } catch (err) {
                 console.error(err);
-                setStatus("Submission failed. Please email curaconcept@gmail.com instead.", "error");
+                const code = safeOneLine(err?.code || "");
+                const msg = safeOneLine(err?.message || "");
+                const detail = code || msg ? ` (${[code, msg].filter(Boolean).join(": ")})` : "";
+                setStatus(`Submission failed. Please email curaconcept@gmail.com instead.${detail}`, "error");
             } finally {
                 submitBtn.disabled = false;
                 submitBtn.classList.remove("opacity-70");

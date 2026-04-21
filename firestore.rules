@@ -1,0 +1,45 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /inquiries/{docId} {
+      allow read: if false;
+
+      // Public write-only "contact form inbox".
+      // Keep reads blocked; validate inputs to reduce spam/abuse.
+      //
+      // serverTimestamp() must be checked with request.time — see:
+      // https://firebase.google.com/docs/firestore/security/rules-conditions#server_timestamp
+      allow create: if
+        request.time < timestamp.date(2100, 1, 1) &&
+        request.resource.data.keys().hasOnly([
+          "fullName",
+          "email",
+          "projectType",
+          "message",
+          "createdAt",
+          "userAgent",
+          "referrer",
+          "page"
+        ]) &&
+        request.resource.data.createdAt == request.time &&
+        request.resource.data.fullName is string &&
+        request.resource.data.fullName.size() >= 2 &&
+        request.resource.data.fullName.size() <= 100 &&
+        request.resource.data.email is string &&
+        request.resource.data.email.size() >= 5 &&
+        request.resource.data.email.size() <= 200 &&
+        request.resource.data.projectType is string &&
+        request.resource.data.projectType.size() >= 2 &&
+        request.resource.data.projectType.size() <= 20 &&
+        request.resource.data.message is string &&
+        request.resource.data.message.size() >= 10 &&
+        request.resource.data.message.size() <= 4000 &&
+        request.resource.data.userAgent is string &&
+        request.resource.data.referrer is string &&
+        request.resource.data.page is string;
+
+      allow update, delete: if false;
+    }
+  }
+}
+
