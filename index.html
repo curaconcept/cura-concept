@@ -1425,7 +1425,7 @@
                     message,
                     createdAt: serverTimestamp(),
                     userAgent: navigator.userAgent,
-                    referrer: document.referrer || null,
+                    referrer: document.referrer || "",
                     page: window.location.href
                 });
                 setStatus("Request received. We’ll reach out shortly.", "success");
