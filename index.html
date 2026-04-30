@@ -242,13 +242,41 @@
             font-size: clamp(2.3rem, 8.5vw, 5.25rem);
             line-height: 0.95;
         }
+        /* Single-line page headers (slightly smaller to avoid wrapping) */
+        .fluid-page-title-compact {
+            font-size: clamp(2.1rem, 7.2vw, 4.75rem);
+            line-height: 0.95;
+        }
+        .fluid-page-title-contact {
+            font-size: clamp(2.0rem, 7vw, 4.5rem);
+            line-height: 0.95;
+        }
+        .fluid-stat-number {
+            font-size: clamp(2.0rem, 6.2vw, 3.0rem);
+            line-height: 1;
+            max-width: 100%;
+            overflow: hidden;
+            white-space: nowrap;
+        }
+        .fluid-stat-number-long {
+            font-size: clamp(1.6rem, 4.8vw, 2.35rem);
+        }
 
         /* Home showcase (logos + 3-card carousel) */
         .cura-carousel-card {
             transition: transform 700ms ease, left 700ms ease, opacity 700ms ease, filter 700ms ease;
             will-change: transform, left, opacity, filter;
         }
-        .cura-modal-hidden { display: none; }
+        /* Services: Hosting checker */
+        .cura-input {
+            background: rgba(255,255,255,0.06);
+            border: 1px solid rgba(255,255,255,0.12);
+        }
+        .cura-input:focus {
+            outline: none;
+            border-color: rgba(255,255,255,0.35);
+            box-shadow: 0 0 0 4px rgba(255,255,255,0.08);
+        }
     </style>
 </head>
 <body class="antialiased selection:bg-white selection:text-black">
@@ -292,7 +320,7 @@
         <!-- ================= HOME PAGE ================= -->
         <section id="home" class="page-section active px-6 md:px-20">
             <!-- Hero Container -->
-            <div class="min-h-[85dvh] flex flex-col justify-center max-w-6xl z-10">
+            <div class="min-h-[85dvh] flex flex-col justify-center max-w-6xl w-full z-10">
                 <div class="overflow-hidden mb-4">
                     <p class="uppercase tracking-[0.3em] text-sm md:text-base text-muted animate-elem transform translate-y-full">Los Angeles, CA</p>
                 </div>
@@ -318,52 +346,24 @@
             <div class="max-w-6xl mx-auto pt-20 border-t border-white/10 scroll-reveal">
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
                     <div class="glass-card p-8 rounded-2xl hoverable">
-                        <span class="font-display text-5xl font-bold mb-4 block text-white scramble-text">0</span>
+                        <span class="font-display fluid-stat-number font-bold mb-4 block text-white tracking-tight">0</span>
                         <h3 class="text-sm uppercase tracking-widest text-emerald-400 font-bold mb-2">Hosting Fees</h3>
                         <p class="text-xs text-muted leading-relaxed">No recurring monthly server costs. We host your pre-compiled assets for free on the edge.</p>
                     </div>
                     <div class="glass-card p-8 rounded-2xl hoverable">
-                        <span class="font-display text-5xl font-bold mb-4 block text-white scramble-text">100%</span>
+                        <span class="font-display fluid-stat-number font-bold mb-4 block text-white tracking-tight">100%</span>
                         <h3 class="text-sm uppercase tracking-widest text-white font-bold mb-2">Custom Built</h3>
                         <p class="text-xs text-muted leading-relaxed">Zero templates. Hand-engineered specifically for your brand's unique identity and logic.</p>
                     </div>
                     <div class="glass-card p-8 rounded-2xl hoverable">
-                        <span class="font-display text-5xl font-bold mb-4 block text-white scramble-text">∞</span>
+                        <span class="font-display fluid-stat-number font-bold mb-4 block text-white tracking-tight">∞</span>
                         <h3 class="text-sm uppercase tracking-widest text-white font-bold mb-2">Scalability</h3>
                         <p class="text-xs text-muted leading-relaxed">Decentralized edge networks handle infinite traffic scaling without crashing.</p>
                     </div>
                     <div class="glass-card p-8 rounded-2xl hoverable">
-                        <span class="font-display text-5xl font-bold mb-4 block text-white scramble-text">99.9%</span>
+                        <span class="font-display fluid-stat-number fluid-stat-number-long font-bold mb-4 block text-white tracking-tight">99.9%</span>
                         <h3 class="text-sm uppercase tracking-widest text-white font-bold mb-2">Uptime Security</h3>
                         <p class="text-xs text-muted leading-relaxed">Pre-compiled shell code eliminates standard database vulnerabilities completely.</p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Extended Content: Philosophy & Architecture -->
-            <div class="max-w-6xl mx-auto pt-32 mt-20 border-t border-white/10 scroll-reveal">
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-16 items-start">
-                    <div>
-                        <h2 class="font-display text-4xl md:text-6xl uppercase tracking-tighter mb-8 font-bold scramble-text">Beyond<br>The Template.</h2>
-                        <p class="text-xl text-muted font-light leading-relaxed mb-6">
-                            At Cura Concept, we believe a website should be a dynamic flagship for your brand, not a rented property. Traditional web hosting is a tax on outdated technology—paying monthly for vulnerable, database-driven servers to process the same pages over and over.
-                        </p>
-                        <p class="text-xl text-muted font-light leading-relaxed mb-8">
-                            We specialize in liberating businesses from this cycle. By extracting your site from heavy platforms and converting it into pure, highly-optimized code, we deploy your digital assets onto enterprise-grade edge networks that host these pre-compiled files for free. <strong>The result? Unmatched speed, bank-grade security, and the absolute elimination of your monthly hosting fees. Forever.</strong>
-                        </p>
-                        <a data-page="services" class="nav-link cursor-pointer hoverable inline-block border border-white px-8 py-4 rounded-full text-sm uppercase tracking-widest hover:bg-white hover:text-black transition-colors duration-300">View Capabilities</a>
-                    </div>
-                    
-                    <div class="glass-card p-10 rounded-3xl tilt-card">
-                        <h3 class="font-display text-2xl uppercase mb-8 border-b border-white/20 pb-4">The Cura Advantage</h3>
-                        <div class="flex flex-wrap gap-4 glass-card-content">
-                            <span class="px-5 py-2 border border-white/20 rounded-full text-sm font-medium tracking-wide bg-white text-black shadow-[0_0_25px_rgba(255,255,255,0.4)]">Zero Hosting Fees</span>
-                            <span class="px-5 py-2 border border-white/20 rounded-full text-sm font-medium tracking-wide">100% Custom Built</span>
-                            <span class="px-5 py-2 border border-white/20 rounded-full text-sm font-medium tracking-wide">Interactive 3D Design</span>
-                            <span class="px-5 py-2 border border-white/20 rounded-full text-sm font-medium tracking-wide">Decentralized Edge Network</span>
-                            <span class="px-5 py-2 border border-white/20 rounded-full text-sm font-medium tracking-wide">Bank-Grade Security</span>
-                            <span class="px-5 py-2 border border-white/20 rounded-full text-sm font-medium tracking-wide">No Cookie-Cutter Templates</span>
-                        </div>
                     </div>
                 </div>
             </div>
@@ -398,6 +398,34 @@
                 </div>
             </div>
 
+            <!-- Extended Content: Philosophy & Architecture -->
+            <div class="max-w-6xl mx-auto pt-32 mt-20 border-t border-white/10 scroll-reveal">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
+                    <div>
+                        <h2 class="font-display text-3xl sm:text-4xl lg:text-6xl uppercase tracking-tighter mb-8 font-bold scramble-text">Beyond<br>The Template.</h2>
+                        <p class="text-xl text-muted font-light leading-relaxed mb-6">
+                            At Cura Concept, we believe a website should be a dynamic flagship for your brand, not a rented property. Traditional web hosting is a tax on outdated technology—paying monthly for vulnerable, database-driven servers to process the same pages over and over.
+                        </p>
+                        <p class="text-xl text-muted font-light leading-relaxed mb-8">
+                            We specialize in liberating businesses from this cycle. By extracting your site from heavy platforms and converting it into pure, highly-optimized code, we deploy your digital assets onto enterprise-grade edge networks that host these pre-compiled files for free. <strong>The result? Unmatched speed, bank-grade security, and the absolute elimination of your monthly hosting fees. Forever.</strong>
+                        </p>
+                        <a data-page="services" class="nav-link cursor-pointer hoverable inline-block border border-white px-8 py-4 rounded-full text-sm uppercase tracking-widest hover:bg-white hover:text-black transition-colors duration-300">View Capabilities</a>
+                    </div>
+                    
+                    <div class="glass-card p-10 rounded-3xl tilt-card">
+                        <h3 class="font-display text-2xl uppercase mb-8 border-b border-white/20 pb-4">The Cura Advantage</h3>
+                        <div class="flex flex-wrap gap-4 glass-card-content">
+                            <span class="px-5 py-2 border border-white/20 rounded-full text-sm font-medium tracking-wide bg-white text-black shadow-[0_0_25px_rgba(255,255,255,0.4)]">Zero Hosting Fees</span>
+                            <span class="px-5 py-2 border border-white/20 rounded-full text-sm font-medium tracking-wide">100% Custom Built</span>
+                            <span class="px-5 py-2 border border-white/20 rounded-full text-sm font-medium tracking-wide">Interactive 3D Design</span>
+                            <span class="px-5 py-2 border border-white/20 rounded-full text-sm font-medium tracking-wide">Decentralized Edge Network</span>
+                            <span class="px-5 py-2 border border-white/20 rounded-full text-sm font-medium tracking-wide">Bank-Grade Security</span>
+                            <span class="px-5 py-2 border border-white/20 rounded-full text-sm font-medium tracking-wide">No Cookie-Cutter Templates</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             <!-- FOOTER LINKS -->
             <div class="mt-32 pt-8 border-t border-white/10 flex flex-col md:flex-row justify-between items-center text-xs text-muted uppercase tracking-widest gap-4 pb-12">
                 <p>© 2026 Cura Concept</p>
@@ -415,7 +443,7 @@
                 <div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
                     <div class="lg:col-span-8 flex flex-col justify-center">
                         <div class="overflow-hidden mb-6">
-                            <h2 class="font-display text-5xl md:text-7xl font-bold uppercase tracking-tighter animate-elem transform translate-y-full scramble-text">What We Do.</h2>
+                            <h2 class="font-display fluid-page-title-compact whitespace-nowrap font-bold uppercase tracking-tighter animate-elem transform translate-y-full scramble-text">What We Do.</h2>
                         </div>
                         <p class="text-muted text-xl animate-elem opacity-0 leading-relaxed max-w-3xl">
                             We don't just build websites; we craft comprehensive digital ecosystems. Our primary focus is engineering a flawless, high-performance foundation for your brand while completely eliminating your vulnerable infrastructure costs.
@@ -560,23 +588,45 @@
                     </div>
                 </div>
 
-                <!-- Deep Dive Tech List -->
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-x-16 gap-y-10 mt-16">
-                    <div class="border-t border-white/10 pt-6">
-                        <h4 class="font-display text-xl uppercase font-bold mb-3">Headless Architecture</h4>
-                        <p class="text-muted text-sm leading-relaxed">By decoupling the frontend visual layer from the backend database, we remove the vulnerabilities inherent in systems like WordPress. Your site becomes a secure, pre-rendered shell.</p>
-                    </div>
-                    <div class="border-t border-white/10 pt-6">
-                        <h4 class="font-display text-xl uppercase font-bold mb-3">Global CDN Routing</h4>
-                        <p class="text-muted text-sm leading-relaxed">Your compiled site isn't sitting on one server in one city. It is distributed across a massive Content Delivery Network (CDN), loading instantly for users regardless of their geography.</p>
-                    </div>
-                    <div class="border-t border-white/10 pt-6">
-                        <h4 class="font-display text-xl uppercase font-bold mb-3">Native WebGL / Three.js</h4>
-                        <p class="text-muted text-sm leading-relaxed">We utilize advanced browser APIs to render 3D graphics directly using the client's GPU. This allows for immersive, physics-based interactions without heavy video files.</p>
-                    </div>
-                    <div class="border-t border-white/10 pt-6">
-                        <h4 class="font-display text-xl uppercase font-bold mb-3">Modern Javascript Stack</h4>
-                        <p class="text-muted text-sm leading-relaxed">Built on industry-leading frameworks (React, Next.js, Node), ensuring your digital assets are highly maintainable, infinitely scalable, and future-proofed.</p>
+                <!-- Hosting Checker -->
+                <div class="mt-16">
+                    <div class="glass-card rounded-3xl border border-white/10 overflow-hidden p-8 md:p-12">
+                        <div class="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6 mb-8">
+                            <div>
+                                <h4 class="font-display text-2xl md:text-3xl uppercase tracking-tighter font-bold scramble-text">Hosting Checker</h4>
+                                <p class="text-muted text-sm md:text-base mt-3 max-w-2xl">
+                                    Enter your site URL and we’ll do a quick fingerprint to see if it’s likely on a platform we can migrate off of.
+                                </p>
+                            </div>
+                            <div class="text-[10px] md:text-xs uppercase tracking-widest text-white/50">
+                                *Not always 100% accurate
+                            </div>
+                        </div>
+
+                        <div class="flex flex-col sm:flex-row gap-3">
+                            <input
+                                id="hosting-checker-url"
+                                type="url"
+                                inputmode="url"
+                                autocomplete="url"
+                                placeholder="https://example.com"
+                                class="cura-input w-full px-5 py-4 rounded-2xl text-white/90 placeholder:text-white/35"
+                            />
+                            <button
+                                id="hosting-checker-btn"
+                                type="button"
+                                class="w-full sm:w-auto px-7 py-4 rounded-2xl bg-white text-black font-bold uppercase tracking-widest hoverable hover:bg-neutral-200 transition-colors"
+                            >
+                                Check
+                            </button>
+                        </div>
+
+                        <div id="hosting-checker-result" class="mt-6 min-h-[64px]"></div>
+
+                        <p class="text-xs text-white/40 mt-5 leading-relaxed">
+                            *This tool analyzes publicly visible page code and may be blocked by some sites.
+                            If we can’t detect it, <a data-page="contact" class="nav-link hoverable cursor-pointer underline underline-offset-4 text-white/70 hover:text-white">contact us</a> and we’ll audit it manually.
+                        </p>
                     </div>
                 </div>
             </div>
@@ -654,7 +704,7 @@
         <section id="work" class="page-section px-6 md:px-20">
             <div class="max-w-7xl mx-auto pt-10">
                 <div class="overflow-hidden mb-16">
-                    <h2 class="font-display text-5xl md:text-7xl font-bold uppercase tracking-tighter animate-elem transform translate-y-full scramble-text">Selected Work</h2>
+                    <h2 class="font-display fluid-page-title font-bold uppercase tracking-tighter animate-elem transform translate-y-full scramble-text">Selected Work</h2>
                     <p class="text-muted text-lg md:text-xl mt-6 animate-elem opacity-0 max-w-2xl">A curated selection of digital experiences, rebuilt from the ground up for maximum performance and zero overhead.</p>
                 </div>
 
@@ -775,7 +825,7 @@
                     <!-- Left: Text & Info & FAQ -->
                     <div class="mb-12 lg:mb-0">
                         <div class="overflow-hidden mb-6">
-                            <h2 class="font-display fluid-page-title uppercase font-black tracking-tighter animate-elem transform translate-y-full hoverable inline-block scramble-text">
+                            <h2 class="font-display fluid-page-title-contact whitespace-nowrap uppercase font-black tracking-tighter animate-elem transform translate-y-full hoverable inline-block scramble-text">
                                 Let's Talk.
                             </h2>
                         </div>
@@ -876,7 +926,7 @@
         <!-- ================= TERMS PAGE ================= -->
         <section id="terms" class="page-section px-6 md:px-20">
             <div class="max-w-4xl mx-auto pt-20">
-                <h2 class="font-display text-4xl md:text-6xl font-bold uppercase tracking-tighter mb-12 scramble-text">Terms & Conditions</h2>
+                <h2 class="font-display fluid-page-title font-bold uppercase tracking-tighter mb-12 scramble-text">Terms & Conditions</h2>
                 
                 <div class="space-y-8 text-muted font-light leading-relaxed border-b border-white/10 pb-20">
                     <div>
@@ -919,7 +969,7 @@
         <!-- ================= PRIVACY PAGE ================= -->
         <section id="privacy" class="page-section px-6 md:px-20">
             <div class="max-w-4xl mx-auto pt-20">
-                <h2 class="font-display text-4xl md:text-6xl font-bold uppercase tracking-tighter mb-12 scramble-text">Privacy Policy</h2>
+                <h2 class="font-display fluid-page-title font-bold uppercase tracking-tighter mb-12 scramble-text">Privacy Policy</h2>
                 
                 <div class="space-y-8 text-muted font-light leading-relaxed border-b border-white/10 pb-20">
                     <div>
@@ -989,6 +1039,139 @@
                 }
                 iterations += 1/3; // Speed of decode
             }, 30);
+        }
+
+        function initHostingChecker() {
+            const input = document.getElementById('hosting-checker-url');
+            const btn = document.getElementById('hosting-checker-btn');
+            const result = document.getElementById('hosting-checker-result');
+            if (!input || !btn || !result) return;
+            if (btn.dataset.bound === '1') return;
+            btn.dataset.bound = '1';
+
+            const MIGRATABLE = new Set([
+                'WordPress',
+                'GoDaddy',
+                'Wix',
+                'Squarespace',
+                'Hostinger',
+                'Weebly',
+                'Elementor'
+            ]);
+
+            const platformFingerprints = [
+                { name: 'WordPress', patterns: [/\/wp-content\//i, /\/wp-includes\//i, /<meta[^>]+name=["']generator["'][^>]+wordpress/i] },
+                { name: 'Elementor', patterns: [/elementor/i, /<meta[^>]+name=["']generator["'][^>]+elementor/i] },
+                { name: 'Wix', patterns: [/wixstatic\.com/i, /wix\.com/i, /<meta[^>]+name=["']generator["'][^>]+wix/i, /"wix-warm-up"/i] },
+                { name: 'Squarespace', patterns: [/static1\.squarespace\.com/i, /squarespace\.com/i, /<meta[^>]+name=["']generator["'][^>]+squarespace/i] },
+                { name: 'Weebly', patterns: [/weebly\.com/i, /cdn2\.editmysite\.com/i, /_weebly_/i] },
+                { name: 'GoDaddy', patterns: [/img\.wsimg\.com/i, /godaddy\.com\/websites\/website-builder/i, /secureserver\.net/i] },
+                { name: 'Hostinger', patterns: [/hostinger/i, /hpanel/i, /hostinger\.com/i] },
+                // Not in your migration list (used for "we can't migrate, but can help")
+                { name: 'Shopify', patterns: [/cdn\.shopify\.com/i, /\.myshopify\.com/i, /shopify-checkout-api-token/i] },
+                { name: 'Webflow', patterns: [/data-wf-page/i, /webflow\.com/i, /<meta[^>]+name=["']generator["'][^>]+webflow/i] }
+            ];
+
+            const renderBox = (tone, title, bodyHtml) => {
+                const map = {
+                    success: { bg: 'bg-emerald-500/10', border: 'border-emerald-400/30', title: 'text-emerald-200', text: 'text-white/80' },
+                    warn: { bg: 'bg-amber-500/10', border: 'border-amber-400/30', title: 'text-amber-200', text: 'text-white/80' },
+                    info: { bg: 'bg-white/5', border: 'border-white/10', title: 'text-white', text: 'text-white/70' },
+                    error: { bg: 'bg-red-500/10', border: 'border-red-400/30', title: 'text-red-200', text: 'text-white/80' }
+                };
+                const theme = map[tone] || map.info;
+                result.innerHTML = `
+                    <div class="rounded-2xl ${theme.bg} border ${theme.border} p-5">
+                        <div class="font-display uppercase tracking-widest text-xs ${theme.title} mb-2">${title}</div>
+                        <div class="text-sm md:text-base ${theme.text} leading-relaxed">${bodyHtml}</div>
+                    </div>
+                `;
+            };
+
+            const normalizeUrl = (raw) => {
+                let url = String(raw || '').trim();
+                if (!url) return null;
+                if (!/^https?:\/\//i.test(url)) url = `https://${url}`;
+                try {
+                    const u = new URL(url);
+                    if (!u.hostname) return null;
+                    return u.toString();
+                } catch {
+                    return null;
+                }
+            };
+
+            const detectPlatform = (html) => {
+                if (!html) return null;
+                for (const p of platformFingerprints) {
+                    if (p.patterns.some(rx => rx.test(html))) return p.name;
+                }
+                return null;
+            };
+
+            const analyze = async () => {
+                const url = normalizeUrl(input.value);
+                if (!url) {
+                    renderBox('error', 'Invalid URL', 'Please enter a valid website address (e.g. <span class="text-white">https://example.com</span>).');
+                    return;
+                }
+
+                const host = (() => { try { return new URL(url).hostname; } catch { return 'site'; } })();
+                renderBox('info', 'Analyzing…', `Checking <span class="text-white">${host}</span>.`);
+
+                btn.disabled = true;
+                btn.classList.add('opacity-70');
+
+                try {
+                    const proxyUrl = `https://corsproxy.io/?${encodeURIComponent(url)}`;
+                    const res = await fetch(proxyUrl, { method: 'GET' });
+                    if (!res.ok) throw new Error(`Request failed (${res.status})`);
+                    const html = await res.text();
+                    if (!html) throw new Error('No content returned');
+
+                    const platform = detectPlatform(html);
+                    if (!platform) {
+                        renderBox(
+                            'info',
+                            'Not sure',
+                            `We couldn’t confidently detect your hosting/platform. Please <a data-page="contact" class="nav-link hoverable cursor-pointer underline underline-offset-4 text-white/80 hover:text-white">contact us</a> and we’ll take a manual look.`
+                        );
+                        return;
+                    }
+
+                    if (MIGRATABLE.has(platform)) {
+                        renderBox(
+                            'success',
+                            'Migration eligible',
+                            `This looks like <span class="text-white">${platform}</span>. <strong class="text-white">We can migrate this site.</strong>`
+                        );
+                        return;
+                    }
+
+                    renderBox(
+                        'warn',
+                        'Not eligible for migration',
+                        `This looks like <span class="text-white">${platform}</span>. <strong class="text-white">We can’t do a migration</strong>, but we can still help with other services (design, performance, custom builds, 3D, and rebuilds).`
+                    );
+                } catch (err) {
+                    renderBox(
+                        'info',
+                        'Can’t analyze',
+                        `We couldn’t scan that URL (some sites block public code scanning). Please <a data-page="contact" class="nav-link hoverable cursor-pointer underline underline-offset-4 text-white/80 hover:text-white">contact us</a> and we’ll audit it manually.`
+                    );
+                } finally {
+                    btn.disabled = false;
+                    btn.classList.remove('opacity-70');
+                }
+            };
+
+            btn.addEventListener('click', analyze);
+            input.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter') {
+                    e.preventDefault();
+                    analyze();
+                }
+            });
         }
 
         const initInteractions = () => {
@@ -1101,9 +1284,12 @@
             // Modal
             const modal = document.createElement('div');
             modal.id = 'home-carousel-modal';
-            modal.className = 'cura-modal-hidden fixed inset-0 z-[200] flex items-center justify-center p-4 bg-black/85 backdrop-blur-sm';
+            modal.className = 'fixed inset-0 z-[200] flex items-center justify-center p-4 bg-black/85 backdrop-blur-sm';
+            // Force-hide on load (some CSS frameworks override [hidden]).
+            modal.hidden = true;
+            modal.style.display = 'none';
             modal.innerHTML = `
-              <button id="home-carousel-modal-close" class="absolute top-6 right-6 w-11 h-11 rounded-full bg-white/10 hover:bg-white/20 transition-colors flex items-center justify-center hoverable" aria-label="Close preview">
+              <button type="button" id="home-carousel-modal-close" class="absolute top-6 right-6 z-[210] pointer-events-auto w-11 h-11 rounded-full bg-white/10 hover:bg-white/20 transition-colors flex items-center justify-center hoverable" aria-label="Close preview">
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" class="text-white/90">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18 6L6 18M6 6l12 12"/>
                 </svg>
@@ -1115,12 +1301,23 @@
             document.body.appendChild(modal);
 
             const closeModal = () => {
-                modal.classList.add('cura-modal-hidden');
+                modal.hidden = true;
+                modal.style.display = 'none';
                 document.body.style.overflow = '';
             };
-            modal.querySelector('#home-carousel-modal-close')?.addEventListener('click', closeModal);
+            const closeBtn = modal.querySelector('#home-carousel-modal-close');
+            const closeHandler = (e) => {
+                e?.preventDefault?.();
+                e?.stopPropagation?.();
+                closeModal();
+            };
+            closeBtn?.addEventListener('pointerup', closeHandler);
+            closeBtn?.addEventListener('click', closeHandler);
             modal.addEventListener('click', (e) => { if (e.target === modal) closeModal(); });
             window.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeModal(); });
+
+            // Defensive: ensure it never renders open on first paint.
+            closeModal();
 
             // Carousel state
             let activeIndex = 0;
@@ -1136,7 +1333,8 @@
                          <div class="font-display text-2xl md:text-4xl font-bold uppercase tracking-tighter mb-3">${project.title}</div>
                          <div class="text-white/50 text-sm uppercase tracking-widest">Add image URL to preview</div>
                        </div>`;
-                modal.classList.remove('cura-modal-hidden');
+                modal.hidden = false;
+                modal.style.display = 'flex';
                 document.body.style.overflow = 'hidden';
             };
 
@@ -1241,7 +1439,7 @@
             const start = () => {
                 if (intervalId) return;
                 intervalId = window.setInterval(() => {
-                    if (isHovered || !modal.classList.contains('cura-modal-hidden') || currentPage !== 'home') return;
+                    if (isHovered || !modal.hidden || currentPage !== 'home') return;
                     setActive(activeIndex + 1);
                 }, 2400);
             };
@@ -1623,6 +1821,7 @@
         function init() {
             initInteractions();
             initHomeShowcase();
+            initHostingChecker();
             animate();
             animatePageElementsIn('home'); 
         }
