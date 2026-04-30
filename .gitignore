@@ -3,3 +3,6 @@
 # Cursor / editor settings
 .cursor/
 
+# Local scratch / references
+work preview.html
+
