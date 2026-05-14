@@ -216,6 +216,24 @@
         .pulse-border { animation: pulseBorder 2s infinite; }
         @keyframes pulseBorder { 0% { box-shadow: 0 0 0 0 rgba(255,255,255,0.2); } 70% { box-shadow: 0 0 0 15px rgba(255,255,255,0); } 100% { box-shadow: 0 0 0 0 rgba(255,255,255,0); } }
 
+        /* Portfolio: HTML process strip (drawing → code → development) */
+        .work-process-card {
+            animation: workProcessCycle 4.5s ease-in-out infinite;
+        }
+        .work-phase-drawing { animation-delay: 0s; }
+        .work-phase-code { animation-delay: -1.5s; }
+        .work-phase-dev { animation-delay: -3s; }
+        @keyframes workProcessCycle {
+            0%, 100% { opacity: 0.45; transform: translateY(0); border-color: rgba(255,255,255,0.1); }
+            22% { opacity: 1; transform: translateY(-4px); border-color: rgba(255,255,255,0.32); }
+            35% { opacity: 0.5; transform: translateY(0); border-color: rgba(255,255,255,0.12); }
+        }
+        @media (prefers-reduced-motion: reduce) {
+            .work-process-card { animation: none; opacity: 1; transform: none; }
+            #work-process-graphic .flow-line-x,
+            #work-process-graphic .flow-line-y { animation: none; }
+        }
+
         /* FAQ Accordion Styles */
         .faq-answer {
             max-height: 0;
@@ -722,107 +740,183 @@
             <div class="max-w-7xl mx-auto pt-10">
                 <div class="overflow-hidden mb-16">
                     <h2 class="font-display fluid-page-title font-bold uppercase tracking-tighter animate-elem transform translate-y-full scramble-text">Selected Work</h2>
-                    <p class="text-muted text-lg md:text-xl mt-6 animate-elem opacity-0 max-w-2xl">A curated selection of digital experiences, rebuilt from the ground up for maximum performance and zero overhead.</p>
                 </div>
 
-                <!-- Immersive Portfolio Grid -->
+                <!-- Simple animated process: drawing → code → development -->
+                <div id="work-process-graphic" class="mb-10 md:mb-12 scroll-reveal rounded-3xl border border-white/10 bg-black/35 backdrop-blur-md overflow-hidden shadow-[0_24px_80px_rgba(0,0,0,0.35)]" data-scroll-reveal="fade-deep" aria-label="Project process: drawing, then code, then development">
+                    <div class="px-5 py-9 sm:px-8 sm:py-10 md:px-12 md:py-12">
+                        <p class="text-center text-[10px] sm:text-[11px] uppercase tracking-[0.22em] text-white/40 mb-8 md:mb-10">From idea to launch</p>
+                        <div class="flex flex-col md:flex-row items-stretch md:items-center justify-center gap-3 md:gap-1 max-w-3xl mx-auto">
+                            <div class="work-process-card work-phase-drawing rounded-2xl border border-white/15 bg-white/[0.04] px-4 py-6 md:flex-1 md:min-h-[140px] flex flex-col items-center justify-center text-center">
+                                <svg class="w-11 h-11 md:w-12 md:h-12 text-white/85 mb-3" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true">
+                                    <rect x="9" y="11" width="26" height="28" rx="2" opacity="0.45"/>
+                                    <path d="M15 24c3 6 8 6 12 0M16 32h14" stroke-linecap="round"/>
+                                    <path d="M30 15l3 3" stroke-linecap="round" opacity="0.6"/>
+                                </svg>
+                                <p class="font-display text-xs md:text-sm uppercase tracking-[0.18em] text-white/90">Drawing</p>
+                                <p class="text-[11px] text-muted mt-1.5 leading-snug">Sketches &amp; layout</p>
+                            </div>
+                            <div class="flex md:hidden justify-center py-1" aria-hidden="true">
+                                <div class="w-px h-9 rounded-full flow-line-y opacity-40"></div>
+                            </div>
+                            <div class="hidden md:flex shrink-0 w-10 justify-center" aria-hidden="true">
+                                <div class="w-full max-w-[2.5rem] h-px mt-1 flow-line-x rounded-full opacity-45 self-center"></div>
+                            </div>
+                            <div class="work-process-card work-phase-code rounded-2xl border border-white/15 bg-white/[0.04] px-4 py-6 md:flex-1 md:min-h-[140px] flex flex-col items-center justify-center text-center">
+                                <svg class="w-11 h-11 md:w-12 md:h-12 text-white/85 mb-3" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true">
+                                    <path d="M17 18l-5 6 5 6M31 18l5 6-5 6" stroke-linecap="round" stroke-linejoin="round"/>
+                                    <path d="M26 15l-3 19" stroke-linecap="round" opacity="0.45"/>
+                                </svg>
+                                <p class="font-display text-xs md:text-sm uppercase tracking-[0.18em] text-white/90">Code</p>
+                                <p class="text-[11px] text-muted mt-1.5 leading-snug">Markup, logic &amp; APIs</p>
+                            </div>
+                            <div class="flex md:hidden justify-center py-1" aria-hidden="true">
+                                <div class="w-px h-9 rounded-full flow-line-y opacity-40"></div>
+                            </div>
+                            <div class="hidden md:flex shrink-0 w-10 justify-center" aria-hidden="true">
+                                <div class="w-full max-w-[2.5rem] h-px mt-1 flow-line-x rounded-full opacity-45 self-center"></div>
+                            </div>
+                            <div class="work-process-card work-phase-dev rounded-2xl border border-white/15 bg-white/[0.04] px-4 py-6 md:flex-1 md:min-h-[140px] flex flex-col items-center justify-center text-center">
+                                <svg class="w-11 h-11 md:w-12 md:h-12 text-white/85 mb-3" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true">
+                                    <rect x="11" y="13" width="26" height="20" rx="2"/>
+                                    <path d="M11 19h26" opacity="0.35"/>
+                                    <rect x="17" y="24" width="14" height="6" rx="1" opacity="0.5"/>
+                                </svg>
+                                <p class="font-display text-xs md:text-sm uppercase tracking-[0.18em] text-white/90">Development</p>
+                                <p class="text-[11px] text-muted mt-1.5 leading-snug">Ship, test &amp; refine</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Portfolio grid (2 columns on md+) -->
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-8 scroll-reveal" data-scroll-reveal="fade-deep">
-                    
-                    <!-- Project: CyberPark (Spans Full Width) -->
-                    <div class="md:col-span-2 project-card relative h-[45vh] md:h-[60vh] rounded-3xl overflow-hidden hoverable cursor-pointer group border border-white/10">
-                        <div class="project-bg absolute inset-0 bg-gradient-to-br from-neutral-900 to-black transition-transform duration-1000 ease-out">
-                            <!-- REPLACE SRC WITH YOUR IMAGE URL -->
-                            <img src="assets/portfolio/cyberpark-preview.svg" loading="lazy" decoding="async" class="absolute inset-0 w-full h-full object-cover opacity-40 mix-blend-overlay" alt="CyberPark preview">
-                            <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-white/10 via-transparent to-transparent opacity-50 group-hover:scale-110 transition-transform duration-1000"></div>
-                        </div>
-                        <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent flex flex-col md:flex-row justify-between md:items-end p-8 md:p-10 gap-6">
-                            <div class="pointer-events-none">
-                                <span class="text-[10px] md:text-xs uppercase tracking-widest text-white/60 mb-2 md:mb-3 block">Featured Case Study</span>
-                                <h3 class="font-display text-3xl md:text-6xl font-bold uppercase tracking-tighter">CyberPark.Space</h3>
-                            </div>
-                            <div class="flex flex-wrap gap-2 md:gap-4 pointer-events-none">
-                                <span class="px-3 py-1.5 md:px-4 md:py-2 border border-white/30 rounded-full text-[10px] md:text-xs uppercase tracking-widest backdrop-blur-sm bg-black/30">3D WebGL</span>
-                                <span class="px-3 py-1.5 md:px-4 md:py-2 border border-white/30 rounded-full text-[10px] md:text-xs uppercase tracking-widest backdrop-blur-sm bg-black/30">Tech</span>
-                            </div>
-                        </div>
-                    </div>
 
-                    <!-- Project: Julian & Blake -->
-                    <div class="project-card relative h-[40vh] md:h-[50vh] rounded-3xl overflow-hidden hoverable cursor-pointer group border border-white/10">
-                        <div class="project-bg absolute inset-0 bg-gradient-to-br from-blue-900 to-black transition-transform duration-1000 ease-out">
-                            <!-- REPLACE SRC WITH YOUR IMAGE URL -->
-                            <img src="assets/portfolio/julian-blake-preview.svg" loading="lazy" decoding="async" class="absolute inset-0 w-full h-full object-cover opacity-40 mix-blend-overlay" alt="Julian &amp; Blake preview">
-                            <div class="absolute top-0 right-0 w-[150%] h-[150%] bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-blue-500/20 via-transparent to-transparent opacity-40"></div>
+                    <!-- Imposter Custom Edition -->
+                    <div class="project-card relative h-[40vh] md:h-[50vh] rounded-3xl overflow-hidden hoverable cursor-pointer group border border-white/10 focus:outline-none focus-visible:ring-2 focus-visible:ring-white/40" role="button" tabindex="0" data-project="imposter" aria-label="Open Imposter Custom Edition details">
+                        <div class="project-bg absolute inset-0 bg-zinc-950 transition-transform duration-1000 ease-out">
+                            <img src="assets/portfolio/imposter%20custom%20edition.png" loading="lazy" decoding="async" class="absolute inset-0 w-full h-full object-cover" alt="">
+                            <div class="pointer-events-none absolute inset-0 bg-gradient-to-br from-sky-600/12 via-transparent to-black/20" aria-hidden="true"></div>
                         </div>
-                        <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent flex flex-col justify-end p-8 gap-4">
-                            <div class="pointer-events-none">
-                                <h3 class="font-display text-3xl font-bold uppercase tracking-tighter mb-4">Julian & Blake Realty</h3>
-                                <div class="flex flex-wrap gap-3">
-                                    <span class="px-3 py-1.5 border border-white/30 rounded-full text-[10px] uppercase tracking-widest backdrop-blur-sm bg-black/30">Real Estate</span>
-                                    <span class="px-3 py-1.5 border border-white/30 rounded-full text-[10px] uppercase tracking-widest backdrop-blur-sm bg-black/30">Web Design</span>
+                        <div class="absolute inset-0 flex flex-col justify-end items-start bg-gradient-to-t from-black/80 via-black/25 to-transparent pt-16">
+                            <div class="pointer-events-none w-full text-left px-8 pb-9 pt-4 md:px-10 md:pb-11 md:pt-5 flex flex-col gap-3 md:gap-4">
+                                <h3 class="font-display text-xl md:text-2xl font-medium uppercase tracking-tight leading-snug text-white/95">Imposter Custom Edition</h3>
+                                <div class="flex flex-wrap gap-2.5">
+                                    <span class="px-3.5 py-1.5 border border-white/25 rounded-full text-[10px] uppercase tracking-widest text-white/80 bg-black/25 backdrop-blur-sm">Game</span>
+                                    <span class="px-3.5 py-1.5 border border-white/25 rounded-full text-[10px] uppercase tracking-widest text-white/80 bg-black/25 backdrop-blur-sm">App</span>
+                                    <span class="px-3.5 py-1.5 border border-white/25 rounded-full text-[10px] uppercase tracking-widest text-white/80 bg-black/25 backdrop-blur-sm">Web</span>
                                 </div>
                             </div>
                         </div>
                     </div>
 
-                    <!-- Project: Delete the Divide -->
-                    <div class="project-card relative h-[40vh] md:h-[50vh] rounded-3xl overflow-hidden hoverable cursor-pointer group border border-white/10">
-                        <div class="project-bg absolute inset-0 bg-gradient-to-br from-purple-900 to-black transition-transform duration-1000 ease-out">
-                            <!-- REPLACE SRC WITH YOUR IMAGE URL -->
-                            <img src="assets/portfolio/delete-the-divide-preview.svg" loading="lazy" decoding="async" class="absolute inset-0 w-full h-full object-cover opacity-40 mix-blend-overlay" alt="Delete the Divide preview">
-                            <div class="absolute bottom-0 left-0 w-full h-full bg-[radial-gradient(circle_at_bottom_left,_var(--tw-gradient-stops))] from-purple-500/20 via-transparent to-transparent opacity-50"></div>
+                    <!-- Cardinal Commons -->
+                    <div class="project-card relative h-[40vh] md:h-[50vh] rounded-3xl overflow-hidden hoverable cursor-pointer group border border-white/10 focus:outline-none focus-visible:ring-2 focus-visible:ring-white/40" role="button" tabindex="0" data-project="cardinal" aria-label="Open Cardinal Commons details">
+                        <div class="project-bg absolute inset-0 bg-zinc-950 transition-transform duration-1000 ease-out">
+                            <img src="assets/portfolio/Cardinal%20Commons.avif" loading="lazy" decoding="async" class="absolute inset-0 w-full h-full object-cover" alt="">
+                            <div class="pointer-events-none absolute inset-0 bg-gradient-to-br from-red-600/15 via-transparent to-black/25" aria-hidden="true"></div>
                         </div>
-                        <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent flex flex-col justify-end p-8 gap-4">
-                            <div class="pointer-events-none">
-                                <h3 class="font-display text-3xl font-bold uppercase tracking-tighter mb-4">Delete the Divide</h3>
-                                <div class="flex flex-wrap gap-3">
-                                    <span class="px-3 py-1.5 border border-white/30 rounded-full text-[10px] uppercase tracking-widest backdrop-blur-sm bg-black/30">Gov / LA County</span>
-                                    <span class="px-3 py-1.5 border border-white/30 rounded-full text-[10px] uppercase tracking-widest backdrop-blur-sm bg-black/30">Platform</span>
+                        <div class="absolute inset-0 flex flex-col justify-end items-start bg-gradient-to-t from-black/80 via-black/25 to-transparent pt-16">
+                            <div class="pointer-events-none w-full text-left px-8 pb-9 pt-4 md:px-10 md:pb-11 md:pt-5 flex flex-col gap-3 md:gap-4">
+                                <h3 class="font-display text-xl md:text-2xl font-medium uppercase tracking-tight leading-snug text-white/95">Cardinal Commons</h3>
+                                <div class="flex flex-wrap gap-2.5">
+                                    <span class="px-3.5 py-1.5 border border-white/25 rounded-full text-[10px] uppercase tracking-widest text-white/80 bg-black/25 backdrop-blur-sm">Real Estate</span>
+                                    <span class="px-3.5 py-1.5 border border-white/25 rounded-full text-[10px] uppercase tracking-widest text-white/80 bg-black/25 backdrop-blur-sm">CRM</span>
                                 </div>
                             </div>
                         </div>
                     </div>
 
-                    <!-- Project: LearnBasicTech -->
-                    <div class="project-card relative h-[40vh] md:h-[50vh] rounded-3xl overflow-hidden hoverable cursor-pointer group border border-white/10">
-                        <div class="project-bg absolute inset-0 bg-gradient-to-br from-emerald-900 to-black transition-transform duration-1000 ease-out">
-                            <!-- REPLACE SRC WITH YOUR IMAGE URL -->
-                            <img src="assets/portfolio/learnbasictech-preview.svg" loading="lazy" decoding="async" class="absolute inset-0 w-full h-full object-cover opacity-40 mix-blend-overlay" alt="LearnBasicTech preview">
-                            <svg class="absolute inset-0 w-full h-full opacity-10" xmlns="http://www.w3.org/2000/svg">
-                                <defs><pattern id="dots" x="0" y="0" width="20" height="20" patternUnits="userSpaceOnUse"><circle fill="white" cx="2" cy="2" r="1"></circle></pattern></defs>
-                                <rect x="0" y="0" width="100%" height="100%" fill="url(#dots)"></rect>
-                            </svg>
+                    <!-- LearnBasicTech -->
+                    <div class="project-card relative h-[40vh] md:h-[50vh] rounded-3xl overflow-hidden hoverable cursor-pointer group border border-white/10 focus:outline-none focus-visible:ring-2 focus-visible:ring-white/40" role="button" tabindex="0" data-project="learnbasic" aria-label="Open LearnBasicTech details">
+                        <div class="project-bg absolute inset-0 bg-zinc-950 transition-transform duration-1000 ease-out">
+                            <img src="assets/portfolio/LearnBasicTech.avif" loading="lazy" decoding="async" class="absolute inset-0 w-full h-full object-cover" alt="">
+                            <div class="pointer-events-none absolute inset-0 bg-gradient-to-br from-emerald-600/12 via-transparent to-black/20" aria-hidden="true"></div>
                         </div>
-                        <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent flex flex-col justify-end p-8 gap-4">
-                            <div class="pointer-events-none">
-                                <h3 class="font-display text-3xl font-bold uppercase tracking-tighter mb-4">LearnBasicTech</h3>
-                                <div class="flex flex-wrap gap-3">
-                                    <span class="px-3 py-1.5 border border-white/30 rounded-full text-[10px] uppercase tracking-widest backdrop-blur-sm bg-black/30">Education</span>
-                                    <span class="px-3 py-1.5 border border-white/30 rounded-full text-[10px] uppercase tracking-widest backdrop-blur-sm bg-black/30">LMS Dev</span>
+                        <div class="absolute inset-0 flex flex-col justify-end items-start bg-gradient-to-t from-black/80 via-black/25 to-transparent pt-16">
+                            <div class="pointer-events-none w-full text-left px-8 pb-9 pt-4 md:px-10 md:pb-11 md:pt-5 flex flex-col gap-3 md:gap-4">
+                                <h3 class="font-display text-xl md:text-2xl font-medium uppercase tracking-tight leading-snug text-white/95">LearnBasicTech</h3>
+                                <div class="flex flex-wrap gap-2.5">
+                                    <span class="px-3.5 py-1.5 border border-white/25 rounded-full text-[10px] uppercase tracking-widest text-white/80 bg-black/25 backdrop-blur-sm">Education</span>
+                                    <span class="px-3.5 py-1.5 border border-white/25 rounded-full text-[10px] uppercase tracking-widest text-white/80 bg-black/25 backdrop-blur-sm">LMS</span>
                                 </div>
                             </div>
                         </div>
                     </div>
 
-                    <!-- Project: Cardinal Commons -->
-                    <div class="project-card relative h-[40vh] md:h-[50vh] rounded-3xl overflow-hidden hoverable cursor-pointer group border border-white/10">
-                        <div class="project-bg absolute inset-0 bg-gradient-to-br from-red-900 to-black transition-transform duration-1000 ease-out">
-                            <!-- REPLACE SRC WITH YOUR IMAGE URL -->
-                            <img src="assets/portfolio/cardinal-commons-preview.svg" loading="lazy" decoding="async" class="absolute inset-0 w-full h-full object-cover opacity-40 mix-blend-overlay" alt="Cardinal Commons preview">
-                            <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-red-500/10 via-transparent to-transparent opacity-60 mix-blend-overlay"></div>
+                    <!-- Julian & Blake Realty -->
+                    <div class="project-card relative h-[40vh] md:h-[50vh] rounded-3xl overflow-hidden hoverable cursor-pointer group border border-white/10 focus:outline-none focus-visible:ring-2 focus-visible:ring-white/40" role="button" tabindex="0" data-project="julian" aria-label="Open Julian &amp; Blake Realty details">
+                        <div class="project-bg absolute inset-0 bg-zinc-950 transition-transform duration-1000 ease-out">
+                            <img src="assets/portfolio/Julian%20Blake%20Realty.avif" loading="lazy" decoding="async" class="absolute inset-0 w-full h-full object-cover" alt="">
+                            <div class="pointer-events-none absolute inset-0 bg-gradient-to-br from-blue-600/12 via-transparent to-black/20" aria-hidden="true"></div>
                         </div>
-                        <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent flex flex-col justify-end p-8 gap-4">
-                            <div class="pointer-events-none">
-                                <h3 class="font-display text-3xl font-bold uppercase tracking-tighter mb-4">Cardinal Commons</h3>
-                                <div class="flex flex-wrap gap-3">
-                                    <span class="px-3 py-1.5 border border-white/30 rounded-full text-[10px] uppercase tracking-widest backdrop-blur-sm bg-black/30">Finance</span>
-                                    <span class="px-3 py-1.5 border border-white/30 rounded-full text-[10px] uppercase tracking-widest backdrop-blur-sm bg-black/30">Corporate</span>
+                        <div class="absolute inset-0 flex flex-col justify-end items-start bg-gradient-to-t from-black/80 via-black/25 to-transparent pt-16">
+                            <div class="pointer-events-none w-full text-left px-8 pb-9 pt-4 md:px-10 md:pb-11 md:pt-5 flex flex-col gap-3 md:gap-4">
+                                <h3 class="font-display text-xl md:text-2xl font-medium uppercase tracking-tight leading-snug text-white/95">Julian &amp; Blake Realty</h3>
+                                <div class="flex flex-wrap gap-2.5">
+                                    <span class="px-3.5 py-1.5 border border-white/25 rounded-full text-[10px] uppercase tracking-widest text-white/80 bg-black/25 backdrop-blur-sm">Real Estate</span>
+                                    <span class="px-3.5 py-1.5 border border-white/25 rounded-full text-[10px] uppercase tracking-widest text-white/80 bg-black/25 backdrop-blur-sm">Digital</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Delete the Divide -->
+                    <div class="project-card relative h-[40vh] md:h-[50vh] rounded-3xl overflow-hidden hoverable cursor-pointer group border border-white/10 focus:outline-none focus-visible:ring-2 focus-visible:ring-white/40" role="button" tabindex="0" data-project="deletedivide" aria-label="Open Delete the Divide details">
+                        <div class="project-bg absolute inset-0 bg-zinc-950 transition-transform duration-1000 ease-out">
+                            <img src="assets/portfolio/Delete%20the%20Divide%20%28LA%20COunty%29.avif" loading="lazy" decoding="async" class="absolute inset-0 w-full h-full object-cover" alt="">
+                            <div class="pointer-events-none absolute inset-0 bg-gradient-to-br from-purple-600/12 via-transparent to-black/20" aria-hidden="true"></div>
+                        </div>
+                        <div class="absolute inset-0 flex flex-col justify-end items-start bg-gradient-to-t from-black/80 via-black/25 to-transparent pt-16">
+                            <div class="pointer-events-none w-full text-left px-8 pb-9 pt-4 md:px-10 md:pb-11 md:pt-5 flex flex-col gap-3 md:gap-4">
+                                <h3 class="font-display text-xl md:text-2xl font-medium uppercase tracking-tight leading-snug text-white/95">Delete the Divide</h3>
+                                <div class="flex flex-wrap gap-2.5">
+                                    <span class="px-3.5 py-1.5 border border-white/25 rounded-full text-[10px] uppercase tracking-widest text-white/80 bg-black/25 backdrop-blur-sm">LA County</span>
+                                    <span class="px-3.5 py-1.5 border border-white/25 rounded-full text-[10px] uppercase tracking-widest text-white/80 bg-black/25 backdrop-blur-sm">Civic</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Maryland Blockchain Association -->
+                    <div class="project-card relative h-[40vh] md:h-[50vh] rounded-3xl overflow-hidden hoverable cursor-pointer group border border-white/10 focus:outline-none focus-visible:ring-2 focus-visible:ring-white/40" role="button" tabindex="0" data-project="maryland" aria-label="Open Maryland Blockchain Association details">
+                        <div class="project-bg absolute inset-0 bg-zinc-950 transition-transform duration-1000 ease-out">
+                            <img src="assets/portfolio/Marlyand%20Blockchain%20Association.png" loading="lazy" decoding="async" class="absolute inset-0 w-full h-full object-cover" alt="">
+                            <div class="pointer-events-none absolute inset-0 bg-gradient-to-br from-violet-600/12 via-transparent to-black/20" aria-hidden="true"></div>
+                        </div>
+                        <div class="absolute inset-0 flex flex-col justify-end items-start bg-gradient-to-t from-black/80 via-black/25 to-transparent pt-16">
+                            <div class="pointer-events-none w-full text-left px-8 pb-9 pt-4 md:px-10 md:pb-11 md:pt-5 flex flex-col gap-3 md:gap-4">
+                                <h3 class="font-display text-lg md:text-xl font-medium uppercase tracking-tight leading-snug text-white/95">Maryland Blockchain Association</h3>
+                                <div class="flex flex-wrap gap-2.5">
+                                    <span class="px-3.5 py-1.5 border border-white/25 rounded-full text-[10px] uppercase tracking-widest text-white/80 bg-black/25 backdrop-blur-sm">Tracker</span>
+                                    <span class="px-3.5 py-1.5 border border-white/25 rounded-full text-[10px] uppercase tracking-widest text-white/80 bg-black/25 backdrop-blur-sm">CRM</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Kerens Kreation's -->
+                    <div class="project-card relative h-[40vh] md:h-[50vh] rounded-3xl overflow-hidden hoverable cursor-pointer group border border-white/10 focus:outline-none focus-visible:ring-2 focus-visible:ring-white/40" role="button" tabindex="0" data-project="kerens" aria-label="Open Kerens Kreation's details">
+                        <div class="project-bg absolute inset-0 bg-zinc-950 transition-transform duration-1000 ease-out">
+                            <img src="assets/portfolio/Kerens%20Kreation%27s.png" loading="lazy" decoding="async" class="absolute inset-0 w-full h-full object-cover" alt="">
+                            <div class="pointer-events-none absolute inset-0 bg-gradient-to-br from-amber-950/20 via-transparent to-black/20" aria-hidden="true"></div>
+                        </div>
+                        <div class="absolute inset-0 flex flex-col justify-end items-start bg-gradient-to-t from-black/80 via-black/25 to-transparent pt-16">
+                            <div class="pointer-events-none w-full text-left px-8 pb-9 pt-4 md:px-10 md:pb-11 md:pt-5 flex flex-col gap-3 md:gap-4">
+                                <h3 class="font-display text-xl md:text-2xl font-medium uppercase tracking-tight leading-snug text-white/95">Kerens Kreation's</h3>
+                                <div class="flex flex-wrap gap-2.5">
+                                    <span class="px-3.5 py-1.5 border border-white/25 rounded-full text-[10px] uppercase tracking-widest text-white/80 bg-black/25 backdrop-blur-sm">Orders</span>
+                                    <span class="px-3.5 py-1.5 border border-white/25 rounded-full text-[10px] uppercase tracking-widest text-white/80 bg-black/25 backdrop-blur-sm">Fulfillment</span>
                                 </div>
                             </div>
                         </div>
                     </div>
 
                 </div>
+
+                <p class="max-w-7xl mx-auto mt-16 text-center text-[11px] md:text-xs text-white/45 leading-relaxed px-2">
+                    All projects shown are work that Cura Concepts developers have contributed to, built, or shipped. Named companies and organizations are included because they contracted with or worked directly with our developers; listing them does not imply ongoing endorsement or partnership unless stated elsewhere.
+                </p>
             </div>
 
             <!-- FOOTER LINKS -->
@@ -1266,30 +1360,37 @@
             const carouselMount = document.getElementById('home-carousel');
             if (!companiesMount || !carouselMount) return;
 
+            // Trusted-by row: assets/logos/ — use square exports (see comment in render) so circles crop consistently.
             const companies = [
-                { id: 1, name: "Cyber Park", logoUrl: "" },
-                { id: 2, name: "County of LA", logoUrl: "" },
-                { id: 3, name: "Learn Basic Tech", logoUrl: "" },
-                { id: 4, name: "Buzz Blitz", logoUrl: "" },
-                { id: 5, name: "Pali Resell", logoUrl: "" },
-                { id: 6, name: "J&B Realty", logoUrl: "" },
-                { id: 7, name: "Bridge", logoUrl: "" },
+                { id: 1, name: "LA County", logoUrl: "assets/logos/LA County.avif" },
+                { id: 2, name: "Learn Basic Tech", logoUrl: "assets/logos/Learn Basic  Tech.avif" },
+                { id: 3, name: "Buzz Blitz Media", logoUrl: "assets/logos/BuzzBlitz Media.avif" },
+                { id: 4, name: "Cyberpark", logoUrl: "assets/logos/CYBERPARK LOGO.avif" },
+                { id: 5, name: "Goodbridge Funding", logoUrl: "assets/logos/Goodbridge Funding.avif" },
+                { id: 6, name: "Pali Resell", logoUrl: "assets/logos/Pali.Resell.avif" },
+                { id: 7, name: "Trousdale Realty", logoUrl: "assets/logos/Trousdale Realty.avif" },
+                { id: 8, name: "Imposter Custom Edition", logoUrl: "assets/logos/imposter logo.png" },
             ];
 
             const projects = [
-                { id: 1, title: "Delete The Divide", imageUrl: "assets/portfolio/delete-the-divide-preview.svg" },
-                { id: 2, title: "Buzz Blitz Media", imageUrl: "" },
-                { id: 3, title: "CyberPark.Space", imageUrl: "assets/portfolio/cyberpark-preview.svg" },
-                { id: 4, title: "Julian & Blake Realty", imageUrl: "assets/portfolio/julian-blake-preview.svg" },
-                { id: 5, title: "Cardinal Commons", imageUrl: "assets/portfolio/cardinal-commons-preview.svg" },
+                { id: 1, title: "Imposter Custom Edition", imageUrl: "assets/portfolio/imposter%20custom%20edition.png" },
+                { id: 2, title: "Cardinal Commons", imageUrl: "assets/portfolio/Cardinal%20Commons.avif" },
+                { id: 3, title: "LearnBasicTech", imageUrl: "assets/portfolio/LearnBasicTech.avif" },
+                { id: 4, title: "Julian & Blake Realty", imageUrl: "assets/portfolio/Julian%20Blake%20Realty.avif" },
+                { id: 5, title: "Delete the Divide", imageUrl: "assets/portfolio/Delete%20the%20Divide%20%28LA%20COunty%29.avif" },
+                { id: 6, title: "Maryland Blockchain", imageUrl: "assets/portfolio/Marlyand%20Blockchain%20Association.png" },
+                { id: 7, title: "Kerens Kreation's", imageUrl: "assets/portfolio/Kerens%20Kreation%27s.png" },
             ];
 
-            // Render company bubbles
+            // Logo files: export every mark on the SAME square pixel canvas (e.g. 512×512) with transparent
+            // background; keep artwork inside ~75% of the width/height (centered) so the circular mask never clips it.
             companiesMount.innerHTML = companies.map(c => {
                 const initials = c.name.split(/\s+/).map(p => p[0]).join('').slice(0, 2).toUpperCase();
                 return `
-                  <div class="w-16 h-16 md:w-20 md:h-20 rounded-full overflow-hidden border border-white/15 bg-black/40 backdrop-blur-sm flex items-center justify-center hoverable hover:border-white/30 transition-colors">
-                    ${c.logoUrl ? `<img src="${c.logoUrl}" alt="${c.name} logo" class="w-full h-full object-cover" />`
+                  <div class="w-[80px] h-[80px] md:w-[100px] md:h-[100px] rounded-full overflow-hidden border border-white/15 flex items-center justify-center hoverable hover:border-white/30 transition-colors ${c.logoUrl ? 'bg-neutral-950 ring-1 ring-inset ring-white/[0.04]' : 'bg-black/40 backdrop-blur-sm'}">
+                    ${c.logoUrl ? `<div class="flex h-full w-full items-center justify-center bg-neutral-950 p-1.5 md:p-2">
+                        <img src="${c.logoUrl}" alt="${c.name} logo" class="h-full w-full object-contain object-center select-none" loading="lazy" decoding="async" />
+                      </div>`
                         : `<div class="text-center leading-tight">
                              <div class="font-display text-sm md:text-base font-bold tracking-widest">${initials}</div>
                              <div class="text-[9px] md:text-[10px] text-white/40 uppercase tracking-widest mt-0.5">Logo</div>
@@ -1490,6 +1591,133 @@
             });
         };
 
+        const PORTFOLIO_PROJECT_DATA = {
+            imposter: {
+                title: 'Imposter Custom Edition',
+                image: 'assets/portfolio/imposter%20custom%20edition.png',
+                tags: ['Mobile & web', 'Product design', 'Gaming'],
+                description: 'We delivered the native-style app experience and companion website for a localized spin on social-deduction gameplay. Scope emphasized bespoke flows, pacing, and presentation suited to smaller groups rather than mass-market clones of the viral title—a deliberately tailored product posture from interface through deployment.'
+            },
+            cardinal: {
+                title: 'Cardinal Commons',
+                image: 'assets/portfolio/Cardinal%20Commons.avif',
+                tags: ['Real estate development', 'Custom CMS / marketing site', 'CRM'],
+                description: 'For this development initiative we produced a branded marketing footprint and stewarded CRM infrastructure behind it. Teams needed a coherent story on the front end while maintaining pipeline visibility and relationship data in the back office; we united those requirements so outreach, leads, and follow-up stay consistent with project milestones.'
+            },
+            learnbasic: {
+                title: 'LearnBasicTech',
+                image: 'assets/portfolio/LearnBasicTech.avif',
+                tags: ['Technical leadership', 'LMS scale-out', 'Interactive curriculum'],
+                description: 'We served as lead developer as LearnBasicTech expanded its footprint: authoring and launching more than twenty-five courses, refactoring the learner-facing platform, and introducing original mini-games to reinforce objectives. Today the initiative supports over one thousand students across Los Angeles County, with instrumentation and pacing aligned to classroom and community partners.'
+            },
+            julian: {
+                title: 'Julian & Blake Realty',
+                image: 'assets/portfolio/Julian%20Blake%20Realty.avif',
+                tags: ['Digital program ownership', 'Web modernization'],
+                description: 'Our team acted as the digital partner of record—owning roadmap, UX refresh, and production releases for Julian & Blake Realty. Deliverables ranged from iterative site modernization to aligning content and tooling with how principals wanted brokerage services represented to buyers and sellers, without losing operational continuity between phases.'
+            },
+            deletedivide: {
+                title: 'Delete the Divide',
+                image: 'assets/portfolio/Delete%20the%20Divide%20%28LA%20COunty%29.avif',
+                tags: ['LA County initiative', 'Civic storytelling', 'Public interest'],
+                description: 'We engineered the county-branded Delete the Divide web presence to articulate policy goals, programmatic outcomes, and community pathways addressing digital inclusion. Editorial structure, accessibility baselines, and maintainable authoring patterns help county communicators spotlight why minimizing the digital divide is a regional priority—and how constituents can engage.'
+            },
+            maryland: {
+                title: 'Maryland Blockchain Association',
+                image: 'assets/portfolio/Marlyand%20Blockchain%20Association.png',
+                tags: ['Legislative tracking', 'Member CRM', 'Email programs'],
+                description: 'The association needed more than passive content: stakeholders required a bespoke legislative tracker that surfaces filings, timelines, and context alongside member records. Integrated CRM workflows and segmented newsletter tooling allow leadership to synchronize policy updates with outreach, preserving compliance boundaries while tightening member engagement loops.'
+            },
+            kerens: {
+                title: "Kerens Kreation's",
+                image: 'assets/portfolio/Kerens%20Kreation%27s.png',
+                tags: ['Order operations', 'Workflow design', 'Fulfillment visibility'],
+                description: 'We stood up operational systems that centralize inbound requests, quoting, and fabrication scheduling for handcrafted goods. Intake journeys were modeled to mirror real client collaborations; fulfillment dashboards give the studio predictable status from deposit through shipment, minimizing surprises for both makers and purchasers.'
+            }
+        };
+
+        function initPortfolioProjectModal() {
+            if (document.getElementById('portfolio-project-modal')) return;
+
+            const modal = document.createElement('div');
+            modal.id = 'portfolio-project-modal';
+            modal.setAttribute('role', 'dialog');
+            modal.setAttribute('aria-modal', 'true');
+            modal.className = 'fixed inset-0 z-[220] flex items-center justify-center p-4 bg-black/88 backdrop-blur-md';
+            modal.hidden = true;
+            modal.style.display = 'none';
+            modal.innerHTML = `
+              <button type="button" id="portfolio-modal-close" class="absolute top-5 right-5 z-[230] pointer-events-auto h-11 w-11 rounded-full bg-white/10 hover:bg-white/20 transition-colors flex items-center justify-center hoverable" aria-label="Close project">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" class="text-white/90"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18 6L6 18M6 6l12 12"/></svg>
+              </button>
+              <div class="relative w-full max-w-4xl max-h-[90dvh] overflow-y-auto rounded-3xl border border-white/10 bg-black/70 shadow-[0_40px_100px_rgba(0,0,0,0.65)]">
+                <div class="aspect-[16/9] w-full bg-black/50 border-b border-white/10 overflow-hidden">
+                  <img data-role="image" src="" alt="" class="w-full h-full object-contain"/>
+                </div>
+                <div class="p-6 md:p-10">
+                  <div data-role="tags" class="flex flex-wrap gap-2 mb-4"></div>
+                  <h3 data-role="title" class="font-display text-2xl md:text-4xl uppercase tracking-tighter font-bold mb-4"></h3>
+                  <p data-role="body" class="text-muted text-base md:text-lg leading-relaxed font-light"></p>
+                </div>
+              </div>
+            `;
+            document.body.appendChild(modal);
+
+            const closeModal = () => {
+                modal.hidden = true;
+                modal.style.display = 'none';
+                document.body.style.overflow = '';
+            };
+
+            const openModal = (slug) => {
+                const d = PORTFOLIO_PROJECT_DATA[slug];
+                if (!d) return;
+                modal.querySelector('[data-role="title"]').textContent = d.title;
+                const img = modal.querySelector('[data-role="image"]');
+                img.src = d.image;
+                img.alt = d.title;
+                modal.querySelector('[data-role="body"]').textContent = d.description;
+                const tagMount = modal.querySelector('[data-role="tags"]');
+                tagMount.innerHTML = (d.tags || []).map((t) =>
+                  `<span class="px-3 py-1 rounded-full border border-white/20 text-[10px] uppercase tracking-widest text-white/70 bg-white/5">${t}</span>`
+                ).join('');
+                modal.hidden = false;
+                modal.style.display = 'flex';
+                document.body.style.overflow = 'hidden';
+                modal.querySelector('#portfolio-modal-close')?.focus();
+            };
+
+            modal.querySelector('#portfolio-modal-close')?.addEventListener('click', (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                closeModal();
+            });
+            modal.addEventListener('click', (e) => {
+                if (e.target === modal) closeModal();
+            });
+            window.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape' && !modal.hidden) closeModal();
+            });
+
+            const work = document.getElementById('work');
+            if (!work) return;
+
+            work.addEventListener('click', (e) => {
+                const card = e.target.closest('.project-card[data-project]');
+                if (!card) return;
+                e.preventDefault();
+                openModal(card.getAttribute('data-project'));
+            });
+
+            work.addEventListener('keydown', (e) => {
+                if (e.key !== 'Enter' && e.key !== ' ') return;
+                const card = e.target.closest('.project-card[data-project]');
+                if (!card || !work.contains(card)) return;
+                e.preventDefault();
+                openModal(card.getAttribute('data-project'));
+            });
+        }
+
         /* -----------------------------------------------------------
            2. Three.js WebGL (Background + Floating Geometries + Ripples)
         ----------------------------------------------------------- */
@@ -1591,7 +1819,7 @@
         // 3D Click Ripples Logic
         let ripples = [];
         const handleRippleTrigger = (clientX, clientY, target) => {
-            if(target.tagName !== 'A' && !target.closest('a') && !target.closest('.project-card') && !target.closest('input') && !target.closest('textarea') && !target.closest('select') && !target.closest('.faq-item')) {
+            if(target.tagName !== 'A' && !target.closest('a') && !target.closest('.project-card') && !target.closest('#portfolio-project-modal') && !target.closest('#work-process-graphic') && !target.closest('input') && !target.closest('textarea') && !target.closest('select') && !target.closest('.faq-item')) {
                 const normalizedX = (clientX / window.innerWidth) * 2 - 1;
                 const normalizedY = -(clientY / window.innerHeight) * 2 + 1;
                 
@@ -1911,6 +2139,7 @@
         function init() {
             initInteractions();
             initHomeShowcase();
+            initPortfolioProjectModal();
             initHostingChecker();
             initHeroScrollDown();
             animate();
