@@ -256,6 +256,73 @@
         .fluid-hero-title {
             font-size: clamp(2.86rem, 10.45vw, 6.33rem);
             line-height: 0.92;
+            max-width: 100%;
+        }
+        @media (max-width: 639px) {
+            .fluid-hero-title {
+                font-size: clamp(1.65rem, 7.25vw, 2.35rem);
+                line-height: 1.05;
+                letter-spacing: -0.02em;
+            }
+            .home-hero-eyebrow {
+                font-size: 0.625rem;
+                letter-spacing: 0.14em;
+                line-height: 1.45;
+                padding-inline: 0.125rem;
+            }
+            .home-hero-shell {
+                min-height: min(78dvh, calc(100dvh - 6rem));
+            }
+            .home-hero-inner {
+                padding-inline: 0.125rem;
+            }
+            .home-hero-sub {
+                font-size: 0.875rem;
+                line-height: 1.55;
+                padding-inline: 0.25rem;
+            }
+            .home-hero-cta {
+                margin-top: 1.75rem;
+            }
+            .home-hero-cta span {
+                font-size: 0.75rem;
+                letter-spacing: 0.12em;
+            }
+            .fluid-page-title-compact {
+                font-size: clamp(1.45rem, 6.5vw, 2.1rem);
+                line-height: 1.08;
+                white-space: normal;
+            }
+            .fluid-section-title {
+                font-size: clamp(1.25rem, 5.25vw, 1.75rem);
+                line-height: 1.12;
+                letter-spacing: -0.02em;
+            }
+            #services .services-block {
+                min-width: 0;
+                width: 100%;
+            }
+            #services .services-offering-card {
+                padding: 1.5rem;
+                transform: none !important;
+            }
+            #services .services-offering-card h3 {
+                font-size: 1.375rem;
+            }
+            #services .services-offering-card p {
+                font-size: 1rem;
+            }
+            #services .services-compare-panel {
+                padding: 1.5rem;
+            }
+            #services .services-compare-panel h3 {
+                font-size: 1.375rem;
+                line-height: 1.15;
+            }
+            #services .services-hero-lead {
+                font-size: 1rem;
+                line-height: 1.6;
+            }
         }
         .fluid-page-title {
             font-size: clamp(2.3rem, 8.5vw, 5.25rem);
@@ -265,6 +332,12 @@
         .fluid-page-title-compact {
             font-size: clamp(2.1rem, 7.2vw, 4.75rem);
             line-height: 0.95;
+            max-width: 100%;
+        }
+        .fluid-section-title {
+            font-size: clamp(1.75rem, 5.5vw, 3rem);
+            line-height: 1.08;
+            max-width: 100%;
         }
         .fluid-page-title-contact {
             font-size: clamp(2.0rem, 7vw, 4.5rem);
@@ -344,23 +417,26 @@
     <main id="app-content" class="relative w-full h-full z-10">
         
         <!-- ================= HOME PAGE ================= -->
-        <section id="home" class="page-section active px-6 md:px-20">
+        <section id="home" class="page-section active px-4 sm:px-6 md:px-20">
             <!-- Hero Container -->
-            <div class="min-h-[85dvh] flex flex-col max-w-6xl w-full mx-auto z-10">
-                <div class="flex-1 flex flex-col justify-center items-center text-center w-full">
-                <div class="overflow-hidden mb-4 w-full">
-                    <p class="uppercase tracking-[0.3em] text-sm md:text-base text-muted animate-elem transform translate-y-full">In House Web Development</p>
+            <div class="home-hero-shell min-h-[85dvh] flex flex-col max-w-6xl w-full mx-auto z-10 min-w-0">
+                <div class="home-hero-inner flex-1 flex flex-col justify-center items-center text-center w-full max-w-full min-w-0">
+                <div class="overflow-hidden mb-3 sm:mb-4 w-full max-w-full">
+                    <p class="home-hero-eyebrow uppercase tracking-[0.3em] text-xs sm:text-sm md:text-base text-muted animate-elem transform translate-y-full max-w-full">In House Web Development</p>
                 </div>
-                <h1 class="font-display font-extrabold fluid-hero-title tracking-tighter uppercase mb-6 pointer-events-none scramble-text">
-                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-white to-gray-500">Cura Concepts</span>
-                </h1>
-                <div class="overflow-hidden max-w-2xl mx-auto w-full">
-                    <p class="text-base sm:text-lg md:text-xl text-muted font-light animate-elem transform translate-y-full pointer-events-none">
+                <div class="overflow-hidden w-full max-w-full mb-4 sm:mb-6 px-1">
+                    <h1 class="font-display font-extrabold fluid-hero-title tracking-tighter uppercase pointer-events-none scramble-text w-full max-w-full flex flex-col items-center md:block">
+                        <span class="text-transparent bg-clip-text bg-gradient-to-r from-white to-gray-500">Cura</span>
+                        <span class="text-transparent bg-clip-text bg-gradient-to-r from-white to-gray-500">Concepts</span>
+                    </h1>
+                </div>
+                <div class="overflow-hidden max-w-2xl mx-auto w-full min-w-0">
+                    <p class="home-hero-sub text-base sm:text-lg md:text-xl text-muted font-light animate-elem transform translate-y-full pointer-events-none">
                         We design and build custom, high-performance websites and immersive web experiences—no templates, no bloated hosting stack.
                     </p>
                 </div>
-                
-                <div class="mt-10 md:mt-12 overflow-hidden magnetic-wrap flex justify-center w-full">
+
+                <div class="home-hero-cta mt-8 sm:mt-10 md:mt-12 overflow-hidden magnetic-wrap flex justify-center w-full max-w-full">
                     <a data-page="work" class="nav-link magnetic cursor-pointer hoverable group inline-flex items-center gap-4 animate-elem transform translate-y-full">
                         <span class="uppercase tracking-widest text-sm font-semibold border-b border-white pb-1 group-hover:pr-4 transition-all duration-300 pointer-events-none">Explore Portfolio</span>
                         <svg class="w-5 h-5 transform group-hover:translate-x-2 transition-transform duration-300 pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
@@ -472,15 +548,15 @@
         </section>
 
         <!-- ================= SERVICES PAGE ================= -->
-        <section id="services" class="page-section px-6 md:px-20">
+        <section id="services" class="page-section px-4 sm:px-6 md:px-20">
             <!-- Hero Container -->
-            <div class="max-w-7xl mx-auto w-full min-h-[40vh] flex items-center pt-20">
-                <div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
-                    <div class="lg:col-span-8 flex flex-col justify-center">
-                        <div class="overflow-hidden mb-6">
-                            <h2 class="font-display fluid-page-title-compact whitespace-nowrap font-bold uppercase tracking-tighter animate-elem transform translate-y-full scramble-text">What We Do.</h2>
+            <div class="services-block max-w-7xl mx-auto w-full min-h-0 md:min-h-[40vh] flex items-center pt-12 sm:pt-20 min-w-0">
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 w-full min-w-0">
+                    <div class="lg:col-span-8 flex flex-col justify-center min-w-0 w-full">
+                        <div class="overflow-hidden mb-4 sm:mb-6 w-full max-w-full">
+                            <h2 class="font-display fluid-page-title-compact md:whitespace-nowrap font-bold uppercase tracking-tighter animate-elem transform translate-y-full scramble-text max-w-full">What We Do.</h2>
                         </div>
-                        <p class="text-muted text-xl animate-elem opacity-0 leading-relaxed max-w-3xl">
+                        <p class="services-hero-lead text-muted text-base sm:text-lg md:text-xl animate-elem opacity-0 leading-relaxed max-w-3xl min-w-0">
                             We don't just build websites; we craft comprehensive digital ecosystems. Our primary focus is engineering a flawless, high-performance foundation for your brand while completely eliminating your vulnerable infrastructure costs.
                         </p>
                     </div>
@@ -488,10 +564,10 @@
             </div>
 
             <!-- The "Why Upgrade" Comparison Graphic -->
-            <div class="max-w-7xl mx-auto w-full rounded-3xl border border-white/10 overflow-hidden relative mb-20 scroll-reveal bg-black/40 backdrop-blur-md grid grid-cols-1 md:grid-cols-2" data-scroll-reveal="zoom-soft">
+            <div class="services-block max-w-7xl mx-auto w-full min-w-0 rounded-3xl border border-white/10 overflow-hidden relative mb-20 scroll-reveal bg-black/40 backdrop-blur-md grid grid-cols-1 md:grid-cols-2" data-scroll-reveal="zoom-soft">
                 
                 <!-- Legacy Side -->
-                <div class="p-10 md:p-14 border-b md:border-b-0 md:border-r border-white/10 relative group">
+                <div class="services-compare-panel p-6 sm:p-10 md:p-14 border-b md:border-b-0 md:border-r border-white/10 relative group min-w-0">
                     <div class="absolute inset-0 bg-gradient-to-br from-red-900/5 to-transparent opacity-50 group-hover:opacity-100 transition-opacity duration-500"></div>
                     <div class="relative z-10">
                         <span class="text-[10px] font-mono uppercase tracking-widest text-red-400/50 mb-2 block">The Old Way</span>
@@ -530,7 +606,7 @@
                 </div>
 
                 <!-- Cura Side -->
-                <div class="p-10 md:p-14 relative group overflow-hidden">
+                <div class="services-compare-panel p-6 sm:p-10 md:p-14 relative group overflow-hidden min-w-0">
                     <div class="absolute inset-0 bg-gradient-to-br from-emerald-900/10 to-transparent opacity-50 group-hover:opacity-100 transition-opacity duration-500"></div>
                     
                     <!-- Glowing Edge pulse -->
@@ -580,9 +656,9 @@
             </div>
 
             <!-- The Zero-Cost Architecture Explanation (MOVED TO TOP) -->
-            <div class="max-w-7xl mx-auto py-20 border-t border-white/10 scroll-reveal" data-scroll-reveal="tilt-up">
-                <h3 class="font-display text-4xl md:text-5xl uppercase tracking-tighter mb-6 font-bold">Zero-Cost Architecture</h3>
-                <p class="text-xl text-muted max-w-3xl leading-relaxed mb-16">
+            <div class="services-block max-w-7xl mx-auto py-12 sm:py-20 border-t border-white/10 scroll-reveal min-w-0 w-full" data-scroll-reveal="tilt-up">
+                <h3 class="font-display fluid-section-title uppercase tracking-tighter mb-4 sm:mb-6 font-bold max-w-full">Zero-Cost Architecture</h3>
+                <p class="text-base sm:text-lg md:text-xl text-muted max-w-3xl leading-relaxed mb-10 sm:mb-16 min-w-0">
                     A core pillar of our agency is liberating businesses from the financial drain of continuous hosting subscriptions. We achieve this through a highly optimized, three-step engineering process that transitions your site from rented servers to a free, decentralized architecture:
                 </p>
 
@@ -667,9 +743,9 @@
             </div>
 
             <!-- NEW: Seamless Migration Process -->
-            <div class="max-w-7xl mx-auto py-20 border-t border-white/10 scroll-reveal" data-scroll-reveal="rise-soft">
-                <h3 class="font-display text-4xl md:text-5xl uppercase tracking-tighter mb-6 font-bold">Seamless Migration.</h3>
-                <p class="text-xl text-muted max-w-3xl leading-relaxed mb-12">
+            <div class="services-block max-w-7xl mx-auto py-12 sm:py-20 border-t border-white/10 scroll-reveal min-w-0 w-full" data-scroll-reveal="rise-soft">
+                <h3 class="font-display fluid-section-title uppercase tracking-tighter mb-4 sm:mb-6 font-bold max-w-full">Seamless Migration.</h3>
+                <p class="text-base sm:text-lg md:text-xl text-muted max-w-3xl leading-relaxed mb-8 sm:mb-12 min-w-0">
                     Worried about moving away from your current host? Our dedicated engineering team handles the entire transition. We ensure zero downtime, perfect SEO retention, and a flawless transfer of your domain.
                 </p>
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -698,28 +774,28 @@
             </div>
 
             <!-- Core Offerings Grid (MOVED TO BOTTOM) -->
-            <div class="max-w-7xl mx-auto pt-20 border-t border-white/10 scroll-reveal" data-scroll-reveal="scale-in">
-                <h3 class="font-display text-4xl md:text-5xl uppercase tracking-tighter mb-16 font-bold">Custom Web Dev</h3>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-20">
+            <div class="services-block max-w-7xl mx-auto pt-12 sm:pt-20 border-t border-white/10 scroll-reveal min-w-0 w-full" data-scroll-reveal="scale-in">
+                <h3 class="font-display fluid-section-title uppercase tracking-tighter mb-8 sm:mb-16 font-bold max-w-full">Custom Web Dev</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8 mb-12 sm:mb-20 min-w-0 w-full">
                     <!-- Service Card -->
-                    <div class="glass-card tilt-card p-10 rounded-3xl hoverable">
-                        <div class="glass-card-content pointer-events-none">
-                            <div class="w-14 h-14 mb-8 border border-white/20 rounded-full flex items-center justify-center bg-white/5">
+                    <div class="services-offering-card glass-card tilt-card p-6 sm:p-10 rounded-3xl hoverable min-w-0 w-full max-w-full">
+                        <div class="glass-card-content pointer-events-none min-w-0">
+                            <div class="w-12 h-12 sm:w-14 sm:h-14 mb-6 sm:mb-8 border border-white/20 rounded-full flex items-center justify-center bg-white/5">
                                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path></svg>
                             </div>
-                            <h3 class="font-display text-3xl uppercase mb-4 font-bold">Engineering</h3>
-                            <p class="text-muted text-lg leading-relaxed">Scalable, secure, and lightning-fast web applications built entirely from scratch. We write clean, semantic code that outperforms bloated site builders in every metric.</p>
+                            <h3 class="font-display text-2xl sm:text-3xl uppercase mb-3 sm:mb-4 font-bold break-words">Engineering</h3>
+                            <p class="text-muted text-base sm:text-lg leading-relaxed">Scalable, secure, and lightning-fast web applications built entirely from scratch. We write clean, semantic code that outperforms bloated site builders in every metric.</p>
                         </div>
                     </div>
                     
                     <!-- Service Card -->
-                    <div class="glass-card tilt-card p-10 rounded-3xl hoverable">
-                        <div class="glass-card-content pointer-events-none">
-                            <div class="w-14 h-14 mb-8 border border-white/20 rounded-full flex items-center justify-center bg-white/5">
+                    <div class="services-offering-card glass-card tilt-card p-6 sm:p-10 rounded-3xl hoverable min-w-0 w-full max-w-full">
+                        <div class="glass-card-content pointer-events-none min-w-0">
+                            <div class="w-12 h-12 sm:w-14 sm:h-14 mb-6 sm:mb-8 border border-white/20 rounded-full flex items-center justify-center bg-white/5">
                                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9"></path></svg>
                             </div>
-                            <h3 class="font-display text-3xl uppercase mb-4 font-bold">3D & WebGL</h3>
-                            <p class="text-muted text-lg leading-relaxed">Break the 2D grid. We integrate highly engaging visual physics, custom particle systems, and interactive 3D elements directly into the browser to captivate your audience.</p>
+                            <h3 class="font-display text-2xl sm:text-3xl uppercase mb-3 sm:mb-4 font-bold break-words">3D &amp; WebGL</h3>
+                            <p class="text-muted text-base sm:text-lg leading-relaxed">Break the 2D grid. We integrate highly engaging visual physics, custom particle systems, and interactive 3D elements directly into the browser to captivate your audience.</p>
                         </div>
                     </div>
                 </div>
