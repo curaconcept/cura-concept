@@ -216,20 +216,100 @@
         .pulse-border { animation: pulseBorder 2s infinite; }
         @keyframes pulseBorder { 0% { box-shadow: 0 0 0 0 rgba(255,255,255,0.2); } 70% { box-shadow: 0 0 0 15px rgba(255,255,255,0); } 100% { box-shadow: 0 0 0 0 rgba(255,255,255,0); } }
 
-        /* Portfolio: HTML process strip (drawing → code → development) */
+        /* Portfolio: animated build pipeline (drawing → code → development).
+           All stage animations share one master cycle so the three panels "hand off" to each other:
+           phase 1 ≈ 0–30% (sketch draws), phase 2 ≈ 33–63% (code types), phase 3 ≈ 66–96% (site assembles + deploys). */
+        #work-process-graphic { --wp-cycle: 9s; }
         .work-process-card {
-            animation: workProcessCycle 4.5s ease-in-out infinite;
+            animation: workProcessCycle var(--wp-cycle) ease-in-out infinite both;
         }
         .work-phase-drawing { animation-delay: 0s; }
-        .work-phase-code { animation-delay: -1.5s; }
-        .work-phase-dev { animation-delay: -3s; }
+        .work-phase-code { animation-delay: 3s; }
+        .work-phase-dev { animation-delay: 6s; }
         @keyframes workProcessCycle {
-            0%, 100% { opacity: 0.45; transform: translateY(0); border-color: rgba(255,255,255,0.1); }
-            22% { opacity: 1; transform: translateY(-4px); border-color: rgba(255,255,255,0.32); }
-            35% { opacity: 0.5; transform: translateY(0); border-color: rgba(255,255,255,0.12); }
+            0%, 38%, 100% { opacity: 0.55; transform: translateY(0); border-color: rgba(255,255,255,0.10); }
+            5%, 30% { opacity: 1; transform: translateY(-3px); border-color: rgba(255,255,255,0.34); }
+        }
+        .wp-grid-bg {
+            background-image: radial-gradient(rgba(255,255,255,0.13) 1px, transparent 1px);
+            background-size: 12px 12px;
+        }
+        /* Stage 1: wireframe pencil-draws itself (single multi-subpath path drawn sequentially) */
+        .wp-sketch-path {
+            stroke-dasharray: 1;
+            stroke-dashoffset: 1;
+            animation: wpDraw var(--wp-cycle) linear infinite;
+        }
+        @keyframes wpDraw {
+            0% { stroke-dashoffset: 1; opacity: 1; }
+            28%, 93% { stroke-dashoffset: 0; opacity: 1; }
+            98%, 100% { stroke-dashoffset: 0; opacity: 0; }
+        }
+        /* Stage 2: editor lines type in (typewriter clip reveal, staggered via --wpd) */
+        .wp-code-line {
+            clip-path: inset(0 100% 0 0);
+            animation: wpType var(--wp-cycle) steps(14, end) infinite both;
+            animation-delay: var(--wpd, 0s);
+        }
+        @keyframes wpType {
+            0%, 33% { clip-path: inset(0 100% 0 0); }
+            40%, 96% { clip-path: inset(0 0 0 0); }
+            100% { clip-path: inset(0 100% 0 0); }
+        }
+        .wp-caret { animation: wpCaret 1s steps(1, end) infinite; }
+        @keyframes wpCaret { 50% { opacity: 0; } }
+        /* Stage 3: page blocks pop into the browser, deploy bar fills, LIVE lights up */
+        .wp-build {
+            opacity: 0;
+            animation: wpBuild var(--wp-cycle) ease-out infinite both;
+            animation-delay: var(--wpd, 0s);
+        }
+        @keyframes wpBuild {
+            0%, 66% { opacity: 0; transform: translateY(8px) scale(0.97); }
+            72%, 96% { opacity: 1; transform: none; }
+            100% { opacity: 0; transform: translateY(8px) scale(0.97); }
+        }
+        .wp-deploy-fill {
+            transform-origin: left;
+            transform: scaleX(0);
+            animation: wpDeploy var(--wp-cycle) linear infinite;
+        }
+        @keyframes wpDeploy {
+            0%, 66% { transform: scaleX(0); }
+            90%, 96% { transform: scaleX(1); }
+            100% { transform: scaleX(0); }
+        }
+        .wp-live { animation: wpLive var(--wp-cycle) ease-in-out infinite both; }
+        @keyframes wpLive {
+            0%, 80% { opacity: 0.2; }
+            86%, 96% { opacity: 1; }
+            100% { opacity: 0.2; }
+        }
+        .wp-live-dot { animation: wpLiveDot 1.2s ease-in-out infinite; }
+        @keyframes wpLiveDot {
+            0%, 100% { box-shadow: 0 0 0 0 rgba(52,211,153,0.5); }
+            60% { box-shadow: 0 0 0 6px rgba(52,211,153,0); }
+        }
+        /* Master timeline scrubber under the panels */
+        .wp-progress {
+            transform-origin: left;
+            animation: wpProgress var(--wp-cycle) linear infinite;
+        }
+        @keyframes wpProgress {
+            0% { transform: scaleX(0); opacity: 1; }
+            96% { transform: scaleX(1); opacity: 1; }
+            100% { transform: scaleX(1); opacity: 0; }
         }
         @media (prefers-reduced-motion: reduce) {
-            .work-process-card { animation: none; opacity: 1; transform: none; }
+            .work-process-card, .wp-sketch-path, .wp-code-line, .wp-caret,
+            .wp-build, .wp-deploy-fill, .wp-live, .wp-live-dot, .wp-progress { animation: none; }
+            .work-process-card { opacity: 1; transform: none; }
+            .wp-sketch-path { stroke-dashoffset: 0; }
+            .wp-code-line { clip-path: none; }
+            .wp-build { opacity: 1; transform: none; }
+            .wp-deploy-fill { transform: scaleX(1); }
+            .wp-live { opacity: 1; }
+            .wp-progress { transform: scaleX(1); }
             #work-process-graphic .flow-line-x,
             #work-process-graphic .flow-line-y { animation: none; }
         }
@@ -824,48 +904,104 @@
                     <h2 class="font-display fluid-page-title font-bold uppercase tracking-tighter animate-elem transform translate-y-full scramble-text">Selected Work</h2>
                 </div>
 
-                <!-- Simple animated process: drawing → code → development -->
-                <div id="work-process-graphic" class="mb-10 md:mb-12 scroll-reveal rounded-3xl border border-white/10 bg-black/35 backdrop-blur-md overflow-hidden shadow-[0_24px_80px_rgba(0,0,0,0.35)]" data-scroll-reveal="fade-deep" aria-label="Project process: drawing, then code, then development">
+                <!-- Animated build pipeline: sketch draws → code types → site assembles & deploys -->
+                <div id="work-process-graphic" class="mb-10 md:mb-12 scroll-reveal rounded-3xl border border-white/10 bg-black/35 backdrop-blur-md overflow-hidden shadow-[0_24px_80px_rgba(0,0,0,0.35)]" data-scroll-reveal="fade-deep" aria-label="Project process: a wireframe is sketched, translated into code, then assembled and deployed live">
                     <div class="px-5 py-9 sm:px-8 sm:py-10 md:px-12 md:py-12">
                         <p class="text-center text-[10px] sm:text-[11px] uppercase tracking-[0.22em] text-white/40 mb-8 md:mb-10">From idea to launch</p>
-                        <div class="flex flex-col md:flex-row items-stretch md:items-center justify-center gap-3 md:gap-1 max-w-3xl mx-auto">
-                            <div class="work-process-card work-phase-drawing rounded-2xl border border-white/15 bg-white/[0.04] px-4 py-6 md:flex-1 md:min-h-[140px] flex flex-col items-center justify-center text-center">
-                                <svg class="w-11 h-11 md:w-12 md:h-12 text-white/85 mb-3" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true">
-                                    <rect x="9" y="11" width="26" height="28" rx="2" opacity="0.45"/>
-                                    <path d="M15 24c3 6 8 6 12 0M16 32h14" stroke-linecap="round"/>
-                                    <path d="M30 15l3 3" stroke-linecap="round" opacity="0.6"/>
-                                </svg>
-                                <p class="font-display text-xs md:text-sm uppercase tracking-[0.18em] text-white/90">Drawing</p>
-                                <p class="text-[11px] text-muted mt-1.5 leading-snug">Sketches &amp; layout</p>
+                        <div class="flex flex-col md:flex-row items-stretch justify-center gap-3 md:gap-1 max-w-4xl mx-auto">
+
+                            <!-- Stage 1: the artboard — wireframe draws itself in -->
+                            <div class="work-process-card work-phase-drawing rounded-2xl border border-white/15 bg-white/[0.04] overflow-hidden md:flex-1 flex flex-col">
+                                <div class="wp-grid-bg relative h-32 md:h-36 border-b border-white/10" aria-hidden="true">
+                                    <svg class="absolute inset-0 w-full h-full text-white/80" viewBox="0 0 200 120" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
+                                        <path class="wp-sketch-path" pathLength="1" d="M36 22h128M36 22v76M164 22v76M36 98h128 M46 34h52v14h-52z M46 58h108 M46 68h84 M46 84h30v8h-30z"/>
+                                        <path class="wp-sketch-path" pathLength="1" style="animation-delay:0.4s" d="M118 34l30 14M118 48l30-14 M148 34h0.01" opacity="0.55"/>
+                                        <circle class="wp-sketch-path" pathLength="1" style="animation-delay:0.7s" cx="133" cy="41" r="9" opacity="0.7"/>
+                                    </svg>
+                                    <span class="absolute top-2.5 left-3 text-[9px] uppercase tracking-[0.2em] text-white/35 font-mono">artboard · v3</span>
+                                </div>
+                                <div class="px-4 py-4 text-center">
+                                    <p class="font-display text-xs md:text-sm uppercase tracking-[0.18em] text-white/90">Drawing</p>
+                                    <p class="text-[11px] text-muted mt-1 leading-snug">Sketches &amp; layout</p>
+                                </div>
                             </div>
+
                             <div class="flex md:hidden justify-center py-1" aria-hidden="true">
                                 <div class="w-px h-9 rounded-full flow-line-y opacity-40"></div>
                             </div>
                             <div class="hidden md:flex shrink-0 w-10 justify-center" aria-hidden="true">
-                                <div class="w-full max-w-[2.5rem] h-px mt-1 flow-line-x rounded-full opacity-45 self-center"></div>
+                                <div class="w-full max-w-[2.5rem] h-px flow-line-x rounded-full opacity-45 self-center"></div>
                             </div>
-                            <div class="work-process-card work-phase-code rounded-2xl border border-white/15 bg-white/[0.04] px-4 py-6 md:flex-1 md:min-h-[140px] flex flex-col items-center justify-center text-center">
-                                <svg class="w-11 h-11 md:w-12 md:h-12 text-white/85 mb-3" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true">
-                                    <path d="M17 18l-5 6 5 6M31 18l5 6-5 6" stroke-linecap="round" stroke-linejoin="round"/>
-                                    <path d="M26 15l-3 19" stroke-linecap="round" opacity="0.45"/>
-                                </svg>
-                                <p class="font-display text-xs md:text-sm uppercase tracking-[0.18em] text-white/90">Code</p>
-                                <p class="text-[11px] text-muted mt-1.5 leading-snug">Markup, logic &amp; APIs</p>
+
+                            <!-- Stage 2: the editor — code types itself -->
+                            <div class="work-process-card work-phase-code rounded-2xl border border-white/15 bg-white/[0.04] overflow-hidden md:flex-1 flex flex-col">
+                                <div class="relative h-32 md:h-36 border-b border-white/10 bg-black/40" aria-hidden="true">
+                                    <div class="flex items-center gap-1.5 px-3 h-7 border-b border-white/10">
+                                        <span class="w-2 h-2 rounded-full bg-red-400/60"></span>
+                                        <span class="w-2 h-2 rounded-full bg-yellow-400/60"></span>
+                                        <span class="w-2 h-2 rounded-full bg-green-400/60"></span>
+                                        <span class="ml-2 text-[9px] font-mono text-white/35">index.html</span>
+                                    </div>
+                                    <div class="px-3.5 pt-2.5 font-mono text-[10px] md:text-[10.5px] leading-[1.65] whitespace-nowrap">
+                                        <p class="wp-code-line" style="--wpd:0s"><span class="text-white/30">1</span>&nbsp; <span class="text-sky-300/90">&lt;section</span> <span class="text-emerald-300/80">class</span><span class="text-white/50">=</span><span class="text-amber-200/80">"hero"</span><span class="text-sky-300/90">&gt;</span></p>
+                                        <p class="wp-code-line" style="--wpd:0.5s"><span class="text-white/30">2</span>&nbsp;&nbsp;&nbsp; <span class="text-sky-300/90">&lt;h1&gt;</span><span class="text-white/80">Idea → Live</span><span class="text-sky-300/90">&lt;/h1&gt;</span></p>
+                                        <p class="wp-code-line" style="--wpd:1s"><span class="text-white/30">3</span>&nbsp;&nbsp;&nbsp; <span class="text-violet-300/80">renderScene</span><span class="text-white/60">(</span><span class="text-amber-200/80">'webgl'</span><span class="text-white/60">);</span></p>
+                                        <p class="wp-code-line" style="--wpd:1.5s"><span class="text-white/30">4</span>&nbsp; <span class="text-sky-300/90">&lt;/section&gt;</span><span class="wp-caret text-white/80">▍</span></p>
+                                    </div>
+                                </div>
+                                <div class="px-4 py-4 text-center">
+                                    <p class="font-display text-xs md:text-sm uppercase tracking-[0.18em] text-white/90">Code</p>
+                                    <p class="text-[11px] text-muted mt-1 leading-snug">Markup, logic &amp; APIs</p>
+                                </div>
                             </div>
+
                             <div class="flex md:hidden justify-center py-1" aria-hidden="true">
                                 <div class="w-px h-9 rounded-full flow-line-y opacity-40"></div>
                             </div>
                             <div class="hidden md:flex shrink-0 w-10 justify-center" aria-hidden="true">
-                                <div class="w-full max-w-[2.5rem] h-px mt-1 flow-line-x rounded-full opacity-45 self-center"></div>
+                                <div class="w-full max-w-[2.5rem] h-px flow-line-x rounded-full opacity-45 self-center"></div>
                             </div>
-                            <div class="work-process-card work-phase-dev rounded-2xl border border-white/15 bg-white/[0.04] px-4 py-6 md:flex-1 md:min-h-[140px] flex flex-col items-center justify-center text-center">
-                                <svg class="w-11 h-11 md:w-12 md:h-12 text-white/85 mb-3" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true">
-                                    <rect x="11" y="13" width="26" height="20" rx="2"/>
-                                    <path d="M11 19h26" opacity="0.35"/>
-                                    <rect x="17" y="24" width="14" height="6" rx="1" opacity="0.5"/>
-                                </svg>
-                                <p class="font-display text-xs md:text-sm uppercase tracking-[0.18em] text-white/90">Development</p>
-                                <p class="text-[11px] text-muted mt-1.5 leading-snug">Ship, test &amp; refine</p>
+
+                            <!-- Stage 3: the browser — page assembles, deploys, goes live -->
+                            <div class="work-process-card work-phase-dev rounded-2xl border border-white/15 bg-white/[0.04] overflow-hidden md:flex-1 flex flex-col">
+                                <div class="relative h-32 md:h-36 border-b border-white/10 bg-black/40" aria-hidden="true">
+                                    <div class="flex items-center gap-2 px-3 h-7 border-b border-white/10">
+                                        <svg class="w-3 h-3 text-white/40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" d="M15 19l-7-7 7-7" opacity="0.7"/></svg>
+                                        <span class="flex-1 h-3.5 rounded-full bg-white/[0.07] text-[8px] font-mono text-white/45 flex items-center px-2 tracking-wide">cura-concept.com</span>
+                                        <span class="wp-live flex items-center gap-1 text-[8px] font-mono uppercase tracking-widest text-emerald-300">
+                                            <span class="wp-live-dot w-1.5 h-1.5 rounded-full bg-emerald-400"></span>Live
+                                        </span>
+                                    </div>
+                                    <div class="px-3.5 pt-2.5 space-y-1.5">
+                                        <div class="wp-build h-5 w-3/4 rounded bg-gradient-to-r from-white/20 to-white/[0.06]" style="--wpd:0s"></div>
+                                        <div class="wp-build flex gap-1.5" style="--wpd:0.35s">
+                                            <div class="h-8 flex-1 rounded bg-white/[0.09]"></div>
+                                            <div class="h-8 flex-1 rounded bg-white/[0.09]"></div>
+                                            <div class="h-8 flex-1 rounded bg-white/[0.09]"></div>
+                                        </div>
+                                        <div class="wp-build h-2 w-1/2 rounded bg-white/[0.08]" style="--wpd:0.7s"></div>
+                                        <div class="wp-build pt-1" style="--wpd:1s">
+                                            <div class="flex items-center justify-between mb-1">
+                                                <span class="text-[8px] font-mono uppercase tracking-widest text-white/40">Deploying to edge</span>
+                                                <span class="text-[8px] font-mono text-emerald-300/80">✓</span>
+                                            </div>
+                                            <div class="h-1 rounded-full bg-white/10 overflow-hidden">
+                                                <div class="wp-deploy-fill h-full w-full rounded-full bg-gradient-to-r from-emerald-400/70 to-emerald-300"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="px-4 py-4 text-center">
+                                    <p class="font-display text-xs md:text-sm uppercase tracking-[0.18em] text-white/90">Development</p>
+                                    <p class="text-[11px] text-muted mt-1 leading-snug">Ship, test &amp; refine</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Master timeline scrubber -->
+                        <div class="max-w-4xl mx-auto mt-6 md:mt-7" aria-hidden="true">
+                            <div class="h-px bg-white/10 rounded-full overflow-hidden">
+                                <div class="wp-progress h-full w-full bg-gradient-to-r from-white/25 via-white/60 to-emerald-300/80"></div>
                             </div>
                         </div>
                     </div>
